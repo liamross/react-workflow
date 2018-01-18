@@ -20,6 +20,7 @@
   }
 
   &--dragging {
+    z-index: 1;
     .WorkflowBlock__background {
       fill-opacity: 0.8;
       stroke-opacity: 0.8;
@@ -32,12 +33,12 @@
 
   &--invalid {
     .WorkflowBlock__background {
-      fill: #654;
-      stroke: #600;
+      fill: #B80;
+      stroke: #E00;
     }
 
     .WorkflowBlock__text {
-      fill: #600;
+      fill: #E00;
     }
   }
 }

@@ -7,6 +7,7 @@ const propTypes = {
   //
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  gridSize: PropTypes.number.isRequired,
   isSelected: PropTypes.bool.isRequired,
   isDragging: PropTypes.bool.isRequired,
   isInvalid: PropTypes.bool.isRequired,
@@ -25,6 +26,7 @@ const defaultProps = {
 function WorkflowBlock({
   title,
   id,
+  gridSize,
   isSelected,
   isDragging,
   isInvalid,
@@ -37,7 +39,6 @@ function WorkflowBlock({
 
   const FONT_HEIGHT = 14;
   const fontX = x + width / 2;
-
   const fontY = y + FONT_HEIGHT / 2 + height / 2;
 
   return (
