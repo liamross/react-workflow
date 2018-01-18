@@ -40,3 +40,18 @@ export const isBlockColliding = (
 export const roundToNearest = (number, interval) => (
   Math.round(number / interval) * interval
 );
+
+/**
+ *
+ * @param {string} id -
+ * @param {Array.<Object>} blocks -
+ * @returns {Array.<Object>} -
+ */
+export const setIdToTop = (id, blocks) => {
+  const sortBlocks = blocks.slice();
+  return sortBlocks.sort((a, b) => {
+    if (b.id === id) { return -1 }
+    if (a.id === id) { return 1 }
+    return 0;
+  });
+};

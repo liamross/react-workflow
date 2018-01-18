@@ -1,21 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { WorkflowBlock } from './WorkflowBlock';
-import { isBlockColliding, roundToNearest } from './workflowUtils';
+import { Block } from './Block';
+import { isBlockColliding, roundToNearest, setIdToTop } from './workflowUtils';
 
-import './WorkflowWorkspace.scss';
-
-const propTypes = {
-  onChange: PropTypes.func,
-  gridSize: PropTypes.number,
-  allowAdjacentBlocks: PropTypes.bool,
-};
-
-const defaultProps = {
-  onChange: null,
-  gridSize: 20,
-  allowAdjacentBlocks: false,
-};
+import './Workflow.scss';
 
 const testingBlocks = [
   {
@@ -52,12 +40,32 @@ const testingBlocks = [
   },
 ];
 
-class WorkflowWorkspace extends PureComponent {
-  constructor() {
-    super();
+// TODO: add some form of submission.
+const propTypes = {
+  blocks: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    id: PropTypes.string,
+    x: PropTypes.number,
+    y: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
+  })),
+  gridSize: PropTypes.number,
+  allowAdjacentBlocks: PropTypes.bool,
+};
+
+const defaultProps = {
+  blocks: testingBlocks,
+  gridSize: 20,
+  allowAdjacentBlocks: false,
+};
+
+class Workspace extends PureComponent {
+  constructor(props) {
+    super(props);
 
     this.state = {
-      blocks: testingBlocks,
+      blocks: props.blocks,
       selected: '',
       dragging: '',
       cursorOutsideWorkspace: false,
@@ -69,6 +77,13 @@ class WorkflowWorkspace extends PureComponent {
     // Keeps track of previous coordinates and original coordinates.
     this.originalMouseCoordinates = {}; // {x: number, y: number}
     this.originalBlockCoordinates = {}; // {x: number, y: number}
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      ...this.state,
+      blocks: nextProps.blocks,
+    })
   }
 
   componentWillUnmount() {
@@ -83,11 +98,13 @@ class WorkflowWorkspace extends PureComponent {
     const targetClass = target.getAttribute('class');
 
     if (targetClass && targetClass.includes('_draggable')) {
-      // Begin dragging if draggable.
+      // Begin dragging, and set dragged block to top.
       const targetId = target.getAttribute('id');
+      const newBlocks = setIdToTop(targetId, blocks);
       this.setState({
         ...this.state,
         dragging: targetId,
+        blocks: newBlocks,
       });
 
       // Store original mouse coordinates.
@@ -105,7 +122,7 @@ class WorkflowWorkspace extends PureComponent {
         gridSize,
       );
 
-      // Listen for movement and leaving the workspace.
+      // Initialize mouse listeners for document and workspace.
       document.addEventListener('mousemove', this.handleMouseMove);
       document.addEventListener('mouseup', this.handleMouseUp);
       if (this.workspace) {
@@ -171,20 +188,6 @@ class WorkflowWorkspace extends PureComponent {
     }
   };
 
-  handleMouseEnter = () => {
-    this.setState({
-      ...this.state,
-      cursorOutsideWorkspace: false,
-    });
-  };
-
-  handleMouseLeave = () => {
-    this.setState({
-      ...this.state,
-      cursorOutsideWorkspace: true,
-    });
-  };
-
   handleMouseUp = () => {
     const { blocks, dragging, cursorOutsideWorkspace, isOverlapping } = this.state;
     const isInvalid = cursorOutsideWorkspace || isOverlapping;
@@ -215,6 +218,20 @@ class WorkflowWorkspace extends PureComponent {
     this.removeListeners();
   };
 
+  handleMouseEnter = () => {
+    this.setState({
+      ...this.state,
+      cursorOutsideWorkspace: false,
+    });
+  };
+
+  handleMouseLeave = () => {
+    this.setState({
+      ...this.state,
+      cursorOutsideWorkspace: true,
+    });
+  };
+
   removeListeners = () => {
     // Remove listeners.
     document.removeEventListener('mousemove', this.handleMouseMove);
@@ -230,7 +247,6 @@ class WorkflowWorkspace extends PureComponent {
   };
 
   render() {
-    const { gridSize } = this.props;
     const { blocks, selected, dragging, cursorOutsideWorkspace, isOverlapping } = this.state;
     const isInvalid = cursorOutsideWorkspace || isOverlapping;
     return (
@@ -243,10 +259,9 @@ class WorkflowWorkspace extends PureComponent {
           const isSelected = selected === block.id;
           const isDragging = dragging === block.id;
           return (
-            <WorkflowBlock
+            <Block
               key={block.id}
               {...block}
-              gridSize={gridSize}
               isSelected={isSelected}
               isDragging={isDragging}
               isInvalid={isInvalid && isDragging}
@@ -258,7 +273,7 @@ class WorkflowWorkspace extends PureComponent {
   }
 }
 
-WorkflowWorkspace.propTypes = propTypes;
-WorkflowWorkspace.defaultProps = defaultProps;
+Workspace.propTypes = propTypes;
+Workspace.defaultProps = defaultProps;
 
-export { WorkflowWorkspace };
+export { Workspace };

@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './WorkflowBlock.scss';
+import './Block.scss';
 
 const propTypes = {
   //
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  gridSize: PropTypes.number.isRequired,
   isSelected: PropTypes.bool.isRequired,
   isDragging: PropTypes.bool.isRequired,
   isInvalid: PropTypes.bool.isRequired,
@@ -23,10 +22,9 @@ const defaultProps = {
   className: '',
 };
 
-function WorkflowBlock({
+function Block({
   title,
   id,
-  gridSize,
   isSelected,
   isDragging,
   isInvalid,
@@ -37,9 +35,14 @@ function WorkflowBlock({
   height,
 }) {
 
+  const rectX = isDragging ? (x - 2) : x;
+  const rectY = isDragging ? (y - 2) : y;
+  const rectW = isDragging ? (width + 4) : width;
+  const rectH = isDragging ? (height + 4) : height;
+
   const FONT_HEIGHT = 14;
-  const fontX = x + width / 2;
-  const fontY = y + FONT_HEIGHT / 2 + height / 2;
+  const fontX = rectX + rectW / 2;
+  const fontY = rectY + FONT_HEIGHT / 2 + rectH / 2;
 
   return (
     <g
@@ -53,10 +56,10 @@ function WorkflowBlock({
     >
       <rect
         className="WorkflowBlock__background"
-        width={width}
-        height={height}
-        x={x}
-        y={y}
+        x={rectX}
+        y={rectY}
+        width={rectW}
+        height={rectH}
       />
       <text
         className="WorkflowBlock__text"
@@ -71,7 +74,7 @@ function WorkflowBlock({
   );
 }
 
-WorkflowBlock.propTypes = propTypes;
-WorkflowBlock.defaultProps = defaultProps;
+Block.propTypes = propTypes;
+Block.defaultProps = defaultProps;
 
-export { WorkflowBlock };
+export { Block };
