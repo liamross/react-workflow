@@ -1,0 +1,35 @@
+{
+  "root": true,
+  "extends": "airbnb",
+  "env": {
+    "jest": true,
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    // Stop errors thrown on linebreaks in windows.
+    "linebreak-style": ["error", "windows"],
+    // Only warn when classes are used without constructors.
+    "react/prefer-stateless-function": ["warn", {"ignorePureComponents": true}],
+    // Stop the requirement for spaced comments (messes up commented-out code).
+    "spaced-comment": "off",
+    // Stop throwing error when default export isn't used on single export.
+    "import/prefer-default-export": "off",
+    // Functions must have uniform breaking behavior.
+    "function-paren-newline": ["error", "consistent"],
+    // Object curlys must have uniform break behavior.
+    "object-curly-newline": ["error", {"consistent": true}],
+    // Enforce max-lengths.
+    "max-len": ["error", {"code": 80, "comments": 80, "ignoreTrailingComments": true}],
+    // Enforce newlines for multiple function chaining.
+    "newline-per-chained-call": ["error", {"ignoreChainWithDepth": 2}],
+    // Ignore spaces used for lining-up end-of-line comments.
+    "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
+    // Modify jsx-a11y accessibility settings.
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/no-noninteractive-element-interactions": "warn",
+    "jsx-a11y/interactive-supports-focus": "warn",
+    // Stop prohibiting vague prop-types.
+    "react/forbid-prop-types": "warn"
+  }
+}
