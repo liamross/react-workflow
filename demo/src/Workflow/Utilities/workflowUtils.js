@@ -1,53 +1,38 @@
 /**
- *
- * @param {Object} block1 -
- * @param {Object} block2 -
- * @param {number} interval -
- * @param {boolean} allowAdjacentBlocks -
- * @returns {boolean}
+ * Returns true if blocks are overlapping in the workspace, false otherwise.
+ * Will return false if either block is an invalid value.
+ * @param {Object} block1 - First block to compare.
+ * @param {Object} block2 - Second block to compare.
+ * @param {number} gridSize - Size of workspace grid.
+ * @param {boolean} allowContact - If false, blocks have 1-gridSize buffer.
+ * @returns {boolean} - Are these blocks overlapping in the workspace?
  */
-export const isBlockColliding = (
-  block1,
-  block2,
-  interval = 0,
-  allowAdjacentBlocks = false,
-) => {
-  if (block1 && block2) {
-    return (
-      block1
-      && block2
-      && block1.x < roundToNearest(block2.width, interval) + block2.x + (allowAdjacentBlocks ? 0 : interval / 2)
-      && block1.y < roundToNearest(block2.height, interval) + block2.y + (allowAdjacentBlocks ? 0 : interval / 2)
-      && block2.x < roundToNearest(block1.width, interval) + block1.x + (allowAdjacentBlocks ? 0 : interval / 2)
-      && block2.y < roundToNearest(block1.height, interval) + block1.y + (allowAdjacentBlocks ? 0 : interval / 2)
-    );
-  } else {
-    console.error(
-      'Block undefined:'
-      + '\nBlock 1: ' + block1
-      + '\nBlock 2: ' + block2
-    );
-    // Say colliding == true... is this the right thing to do?
-    return true;
-  }
-};
-
-/**
- *
- * @param {number} number -
- * @param {number} interval -
- */
-export const roundToNearest = (number, interval) => (
-  Math.round(number / interval) * interval
+export const isBlockColliding = (block1, block2, gridSize, allowContact) => (
+  block1
+  && block2
+  && block1.x < block2.x + (allowContact ? 0 : gridSize / 2) + block2.width
+  && block2.x < block1.x + (allowContact ? 0 : gridSize / 2) + block1.width
+  && block1.y < block2.y + (allowContact ? 0 : gridSize / 2) + block2.height
+  && block2.y < block1.y + (allowContact ? 0 : gridSize / 2) + block1.height
 );
 
 /**
- *
- * @param {string} id -
- * @param {Array.<Object>} blocks -
- * @returns {Array.<Object>} -
+ * Rounds number to nearest interval. Returns number if interval is 0.
+ * @param {number} number - The number to round.
+ * @param {number} interval - The interval to round the number to.
  */
-export const setIdToTop = (id, blocks) => {
+export const roundToNearest = (number, interval) => (
+  interval ? Math.round(number / interval) * interval : number
+);
+
+/**
+ * Sets the block that has matching id to end of array, making it the top
+ * element in the svg. Returns a new array with matching block as last item.
+ * @param {string} id - The id to match.
+ * @param {Array.<Object>} blocks - Unsorted array of blocks.
+ * @returns {Array.<Object>} - Sorted array of blocks.
+ */
+export const blockToFront = (id, blocks) => {
   const sortBlocks = blocks.slice();
   return sortBlocks.sort((a, b) => {
     if (b.id === id) { return -1 }

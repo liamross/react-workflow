@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Block } from '../Block/Block';
 import {
-  isBlockColliding, roundToNearest, setIdToTop,
+  isBlockColliding, roundToNearest, blockToFront,
 } from '../Utilities/workflowUtils';
 
 import './Workspace.scss';
@@ -56,8 +56,8 @@ class Workspace extends PureComponent {
   }
 
   componentWillUnmount() {
-    // Remove listeners if component unmounts mid-move.
-    this.removeListeners();
+    // Remove listeners and reset coordinates if component unmounts mid-move.
+    this.resetDrag();
   }
 
   handleMouseDown = evt => {
@@ -70,7 +70,7 @@ class Workspace extends PureComponent {
       // If click is on draggable component, begin dragging, remove selection,
       // and set dragged block to top (bottom of blocks array).
       const targetId = target.getAttribute('id');
-      const newBlocks = setIdToTop(targetId, blocks);
+      const newBlocks = blockToFront(targetId, blocks);
       this.setState({
         ...this.state,
         selected: '',
@@ -196,7 +196,7 @@ class Workspace extends PureComponent {
     }
 
     // Remove listeners and reset coordinates.
-    this.removeListeners();
+    this.resetDrag();
   };
 
   handleMouseEnter = () => {
@@ -213,7 +213,7 @@ class Workspace extends PureComponent {
     });
   };
 
-  removeListeners = () => {
+  resetDrag = () => {
     // Remove listeners.
     document.removeEventListener('mousemove', this.handleMouseMove);
     document.removeEventListener('mouseup', this.handleMouseUp);
