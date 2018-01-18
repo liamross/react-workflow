@@ -1,4 +1,4 @@
 import { Workflow } from './Workflow';
 
-export { WorkflowShapes } from './Shapes';
+export { WorkflowShapes } from './Block/Shapes';
 export default Workflow;

@@ -7,7 +7,13 @@ const propTypes = {};
 
 const defaultProps = {};
 
-function Shapes({}) {
+const WorkflowShapes = {
+  Circle: 'default-circle',
+  Rectangle: 'default-rectangle',
+  Diamond: 'default-diamond',
+};
+
+function Shapes() {
   return (
     <div className="Shapes">
       hi
@@ -18,10 +24,4 @@ function Shapes({}) {
 Shapes.propTypes = propTypes;
 Shapes.defaultProps = defaultProps;
 
-const WorkflowShapes = {
-  Circle: 0,
-  Rectangle: 1,
-  Diamond: 2,
-};
-
-export { Shapes, WorkflowShapes };
+export { WorkflowShapes, Shapes };

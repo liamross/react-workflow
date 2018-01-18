@@ -1,7 +1,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Block } from './Block';
-import { isBlockColliding, roundToNearest, setIdToTop } from './workflowUtils';
+import { Block } from '../Block/Block';
+import {
+  isBlockColliding, roundToNearest, setIdToTop,
+} from '../Utilities/workflowUtils';
 
 import './Workspace.scss';
 
