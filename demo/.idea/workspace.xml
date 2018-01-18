@@ -20,9 +20,13 @@
             <entry file="file://$PROJECT_DIR$/src/Workflow/Block.jsx">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="321">
-                  <caret line="38" column="41" lean-forward="true" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
+                  <caret line="39" column="55" lean-forward="true" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
+                    <marker date="1516265153566" expanded="true" signature="655:1766" ph="{...}" />
+                    <marker date="1516265153566" expanded="true" signature="1560:1759" ph="&lt;g/&gt;" />
+                    <marker date="1516265153566" expanded="true" signature="1560:1574" ph="&lt;rect/&gt;" />
+                    <marker date="1516265153566" expanded="true" signature="1581:1750" ph="&lt;text/&gt;" />
                   </folding>
                 </state>
               </provider>
@@ -41,8 +45,8 @@
           <file leaf-file-name="Workspace.jsx" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace.jsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="665">
-                  <caret line="100" column="54" lean-forward="false" selection-start-line="100" selection-start-column="54" selection-end-line="100" selection-end-column="54" />
+                <state relative-caret-position="945">
+                  <caret line="27" column="11" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
                   <folding>
                     <element signature="e#0#45#0" expanded="true" />
                   </folding>
@@ -54,11 +58,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="Block.jsx" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Block.jsx" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Workflow/Block.jsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="70">
-                  <caret line="8" column="34" lean-forward="false" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+                <state relative-caret-position="630">
+                  <caret line="39" column="57" lean-forward="true" selection-start-line="39" selection-start-column="57" selection-end-line="39" selection-end-column="57" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                   </folding>
@@ -86,11 +90,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Block.scss" pinned="false" current-in-tab="false">
+          <file leaf-file-name="Block.scss" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Workflow/Block.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="770">
-                  <caret line="37" column="5" lean-forward="false" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
+                <state relative-caret-position="560">
+                  <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Workspace.scss" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace.scss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="280">
+                  <caret line="8" column="3" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
                   <folding />
                 </state>
               </provider>
@@ -117,10 +131,12 @@
       <find>isBlockColliding</find>
       <find>blockBuffer</find>
       <find>blockDeltaY</find>
-      <find>blocks</find>
       <find>key</find>
       <find>WorkflowBlock</find>
       <find>onChange</find>
+      <find>blocks</find>
+      <find>rectH</find>
+      <find>selection</find>
     </findStrings>
     <replaceStrings>
       <replace>block</replace>
@@ -134,6 +150,7 @@
       <replace>isOverlapping</replace>
       <replace>Block</replace>
       <replace>onSubmit</replace>
+      <replace>objectH</replace>
     </replaceStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -150,6 +167,8 @@
         <option value="$PROJECT_DIR$/src/Workflow/workflowUtils.js" />
         <option value="$PROJECT_DIR$/src/Workflow/WorkflowWorkspace.jsx" />
         <option value="$PROJECT_DIR$/src/Workflow/Block.jsx" />
+        <option value="$PROJECT_DIR$/src/Workflow/Workspace.scss" />
+        <option value="$PROJECT_DIR$/src/Workflow/Block.scss" />
         <option value="$PROJECT_DIR$/src/Workflow/Workspace.jsx" />
       </list>
     </option>
@@ -259,12 +278,12 @@
       <updated>1516239625159</updated>
       <workItem from="1516239626470" duration="198000" />
       <workItem from="1516240270718" duration="14000" />
-      <workItem from="1516241685160" duration="21664000" />
+      <workItem from="1516241685160" duration="23937000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21876000" />
+    <option name="totallyTimeSpent" value="24149000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -316,6 +335,10 @@
           <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <marker date="1516265153566" expanded="true" signature="655:1766" ph="{...}" />
+            <marker date="1516265153566" expanded="true" signature="1560:1759" ph="&lt;g/&gt;" />
+            <marker date="1516265153566" expanded="true" signature="1560:1574" ph="&lt;rect/&gt;" />
+            <marker date="1516265153566" expanded="true" signature="1581:1750" ph="&lt;text/&gt;" />
           </folding>
         </state>
       </provider>
@@ -334,6 +357,10 @@
           <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <marker date="1516265153566" expanded="true" signature="655:1766" ph="{...}" />
+            <marker date="1516265153566" expanded="true" signature="1560:1759" ph="&lt;g/&gt;" />
+            <marker date="1516265153566" expanded="true" signature="1560:1574" ph="&lt;rect/&gt;" />
+            <marker date="1516265153566" expanded="true" signature="1581:1750" ph="&lt;text/&gt;" />
           </folding>
         </state>
       </provider>
@@ -495,10 +522,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Workflow/Block.scss">
+    <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="37" column="5" lean-forward="false" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
+        <state relative-caret-position="280">
+          <caret line="8" column="3" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -506,17 +533,29 @@
     <entry file="file://$PROJECT_DIR$/src/Workflow/Block.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
-          <caret line="38" column="41" lean-forward="true" selection-start-line="38" selection-start-column="41" selection-end-line="38" selection-end-column="41" />
+          <caret line="39" column="55" lean-forward="true" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <marker date="1516265153566" expanded="true" signature="655:1766" ph="{...}" />
+            <marker date="1516265153566" expanded="true" signature="1560:1759" ph="&lt;g/&gt;" />
+            <marker date="1516265153566" expanded="true" signature="1560:1574" ph="&lt;rect/&gt;" />
+            <marker date="1516265153566" expanded="true" signature="1581:1750" ph="&lt;text/&gt;" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Workflow/Block.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="100" column="54" lean-forward="false" selection-start-line="100" selection-start-column="54" selection-end-line="100" selection-end-column="54" />
+        <state relative-caret-position="945">
+          <caret line="27" column="11" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>

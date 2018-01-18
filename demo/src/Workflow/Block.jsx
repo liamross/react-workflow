@@ -34,15 +34,17 @@ function Block({
   width,
   height,
 }) {
+  // Object grows slightly if dragging.
+  const DRAG_GROWTH = 6;
+  const objectX = isDragging ? (x - DRAG_GROWTH / 2) : x;
+  const objectY = isDragging ? (y - DRAG_GROWTH / 2) : y;
+  const objectW = isDragging ? (width + DRAG_GROWTH) : width;
+  const objectH = isDragging ? (height + DRAG_GROWTH) : height;
 
-  const rectX = isDragging ? (x - 2) : x;
-  const rectY = isDragging ? (y - 2) : y;
-  const rectW = isDragging ? (width + 4) : width;
-  const rectH = isDragging ? (height + 4) : height;
-
+  // Set text to center of object.
   const FONT_HEIGHT = 14;
-  const fontX = rectX + rectW / 2;
-  const fontY = rectY + FONT_HEIGHT / 2 + rectH / 2;
+  const fontX = objectX + objectW / 2;
+  const fontY = objectY + FONT_HEIGHT / 2 + objectH / 2;
 
   return (
     <g
@@ -56,10 +58,10 @@ function Block({
     >
       <rect
         className="WorkflowBlock__background"
-        x={rectX}
-        y={rectY}
-        width={rectW}
-        height={rectH}
+        x={objectX}
+        y={objectY}
+        width={objectW}
+        height={objectH}
       />
       <text
         className="WorkflowBlock__text"

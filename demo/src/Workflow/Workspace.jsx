@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { Block } from './Block';
 import { isBlockColliding, roundToNearest, setIdToTop } from './workflowUtils';
 
-import './Workflow.scss';
+import './Workspace.scss';
 
 const testingBlocks = [
   {
     title: 'Title 1',
     id: '1',
-    x: 150,
-    y: 150,
+    x: 160,
+    y: 160,
     width: 120,
     height: 80,
   },
@@ -25,8 +25,8 @@ const testingBlocks = [
   {
     title: 'Title 3',
     id: '3',
-    x: 450,
-    y: 150,
+    x: 460,
+    y: 160,
     width: 120,
     height: 80,
   },
@@ -42,14 +42,16 @@ const testingBlocks = [
 
 // TODO: add some form of submission.
 const propTypes = {
-  blocks: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string,
-    id: PropTypes.string,
-    x: PropTypes.number,
-    y: PropTypes.number,
-    width: PropTypes.number,
-    height: PropTypes.number,
-  })),
+  blocks: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      id: PropTypes.string,
+      x: PropTypes.number,
+      y: PropTypes.number,
+      width: PropTypes.number,
+      height: PropTypes.number,
+    }),
+  ),
   gridSize: PropTypes.number,
   allowAdjacentBlocks: PropTypes.bool,
 };
@@ -71,10 +73,11 @@ class Workspace extends PureComponent {
       cursorOutsideWorkspace: false,
       isOverlapping: false,
     };
+
     // Reference to svg workspace.
     this.workspace = null;
 
-    // Keeps track of previous coordinates and original coordinates.
+    // Keeps track of original mouse and block coordinates.
     this.originalMouseCoordinates = {}; // {x: number, y: number}
     this.originalBlockCoordinates = {}; // {x: number, y: number}
   }
@@ -83,7 +86,7 @@ class Workspace extends PureComponent {
     this.setState({
       ...this.state,
       blocks: nextProps.blocks,
-    })
+    });
   }
 
   componentWillUnmount() {
@@ -98,11 +101,13 @@ class Workspace extends PureComponent {
     const targetClass = target.getAttribute('class');
 
     if (targetClass && targetClass.includes('_draggable')) {
-      // Begin dragging, and set dragged block to top.
+      // If click is on draggable component, begin dragging, remove selection,
+      // and set dragged block to top (bottom of blocks array).
       const targetId = target.getAttribute('id');
       const newBlocks = setIdToTop(targetId, blocks);
       this.setState({
         ...this.state,
+        selected: '',
         dragging: targetId,
         blocks: newBlocks,
       });
@@ -112,15 +117,9 @@ class Workspace extends PureComponent {
       this.originalMouseCoordinates.y = evt.clientY;
 
       // Store original block coordinates (to nearest grid).
-      const currentBlock = blocks.find(block => block.id === targetId);
-      this.originalBlockCoordinates.x = roundToNearest(
-        currentBlock.x,
-        gridSize,
-      );
-      this.originalBlockCoordinates.y = roundToNearest(
-        currentBlock.y,
-        gridSize,
-      );
+      const block = blocks.find(bl => bl.id === targetId);
+      this.originalBlockCoordinates.x = roundToNearest(block.x, gridSize);
+      this.originalBlockCoordinates.y = roundToNearest(block.y, gridSize);
 
       // Initialize mouse listeners for document and workspace.
       document.addEventListener('mousemove', this.handleMouseMove);
@@ -130,6 +129,7 @@ class Workspace extends PureComponent {
         this.workspace.addEventListener('mouseenter', this.handleMouseEnter);
       }
     } else {
+      // If click is on non-draggable component, deselect any selected blocks.
       this.setState({
         ...this.state,
         selected: '',
@@ -157,7 +157,7 @@ class Workspace extends PureComponent {
       );
 
       // Check if dragged block is overlapping.
-      const currentBlockIndex = blocks.findIndex(blk => blk.id === dragging);
+      const currentBlockIndex = blocks.findIndex(bl => bl.id === dragging);
       const newBlock = {
         ...blocks[currentBlockIndex],
         x: blockX,
@@ -184,18 +184,32 @@ class Workspace extends PureComponent {
       });
     } else {
       // Remove listeners and reset coordinates.
-      console.error('Drag not registered...\nState:\n', this.state);
+      console.error(
+        'Not in dragging state.'
+        + '\nThis is likely an async issue...'
+        + '\nCurrent state:\n', this.state,
+      );
     }
   };
 
   handleMouseUp = () => {
-    const { blocks, dragging, cursorOutsideWorkspace, isOverlapping } = this.state;
+    const {
+      blocks,
+      dragging,
+      cursorOutsideWorkspace,
+      isOverlapping
+    } = this.state;
     const isInvalid = cursorOutsideWorkspace || isOverlapping;
 
-    // If invalid, move back to original coordinates.
     if (isInvalid && dragging) {
+      // Select draggable component, reset dragging and invalid states, and
+      // reset dragged block to original coordinates.
       this.setState({
         ...this.state,
+        selected: dragging,
+        dragging: '',
+        cursorOutsideWorkspace: false,
+        isOverlapping: false,
         blocks: blocks.map(block => block.id === dragging
           ? {
             ...block,
@@ -204,15 +218,16 @@ class Workspace extends PureComponent {
           }
           : block,
         ),
+      });
+    } else {
+      // Select draggable component, reset dragging and invalid states.
+      this.setState({
+        selected: dragging,
+        dragging: '',
         cursorOutsideWorkspace: false,
         isOverlapping: false,
       });
     }
-
-    this.setState({
-      selection: dragging,
-      dragging: ''
-    });
 
     // Remove listeners and reset coordinates.
     this.removeListeners();

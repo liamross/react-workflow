@@ -5,6 +5,7 @@
       <w>mouseleave</w>
       <w>mousemove</w>
       <w>mouseup</w>
+      <w>unmounts</w>
     </words>
   </dictionary>
 </component>
