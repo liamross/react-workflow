@@ -21,6 +21,18 @@ const propTypes = {
       height: PropTypes.number,
     }),
   ).isRequired,
+  paths: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      id: PropTypes.string,
+      points: PropTypes.arrayOf(
+        PropTypes.shape({
+          x: PropTypes.number,
+          y: PropTypes.number,
+        }),
+      ),
+    }),
+  ).isRequired,
   gridSize: PropTypes.number.isRequired,
   allowAdjacentBlocks: PropTypes.bool.isRequired,
   workspaceClassName: PropTypes.string.isRequired,
@@ -235,7 +247,7 @@ class Workspace extends PureComponent {
       cursorOutsideWorkspace,
       isOverlapping,
     } = this.state;
-    const { width, height, workspaceClassName } = this.props;
+    const { gridSize, width, height, workspaceClassName } = this.props;
     const isInvalid = cursorOutsideWorkspace || isOverlapping;
     return (
       <svg
@@ -247,12 +259,26 @@ class Workspace extends PureComponent {
         onMouseDown={this.handleMouseDown}
         ref={ref => this.workspace = ref}
       >
+        <defs>
+          <pattern
+            id="_grid"
+            width={gridSize}
+            height={gridSize}
+            patternUnits="userSpaceOnUse"
+          >
+            <path
+              d={`M ${gridSize} 0 L 0 0 0 ${gridSize}`}
+              fill="none"
+              stroke="gray"
+              strokeWidth="0.5"
+            />
+          </pattern>
+        </defs>
         <rect
-          className="WorkflowWorkspace__fill"
-          x={0}
-          y={0}
-          width={width}
-          height={height}
+          className="WorkflowWorkspace__grid"
+          width="100%"
+          height="100%"
+          fill="url(#_grid)"
         />
         {blocks.map(block => {
           const isSelected = selected === block.id;

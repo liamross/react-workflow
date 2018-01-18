@@ -6,37 +6,54 @@ import './Workflow.scss';
 
 const testingBlocks = [
   {
-    title: 'Title 1',
-    id: '1',
+    title: 'Block 1',
+    id: 'block-1',
     x: 160,
     y: 160,
     width: 120,
     height: 80,
   },
   {
-    title: 'Title 2',
-    id: '2',
+    title: 'Block 2',
+    id: 'block-2',
     x: 300,
     y: 300,
     width: 120,
     height: 80,
   },
   {
-    title: 'Title 3',
-    id: '3',
+    title: 'Block 3',
+    id: 'block-3',
     x: 460,
     y: 160,
     width: 120,
     height: 80,
   },
   {
-    title: 'Title 4',
-    id: '4',
+    title: 'Block 4',
+    id: 'block-4',
     x: 600,
     y: 300,
     width: 120,
     height: 80,
   },
+];
+
+const testingPaths = [
+  {
+    title: 'Path 1',
+    id: 'path-1',
+    points: [
+      {
+        x: 20,
+        y: 20,
+      },
+      {
+        x: 20,
+        y: 90,
+      },
+    ],
+  }
 ];
 
 const propTypes = {
@@ -52,6 +69,19 @@ const propTypes = {
       height: PropTypes.number,
     }),
   ),
+
+  paths: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      id: PropTypes.string,
+      points: PropTypes.arrayOf(
+        PropTypes.shape({
+          x: PropTypes.number,
+          y: PropTypes.number,
+        }),
+      ),
+    }),
+  ),
   gridSize: PropTypes.number,
   allowAdjacentBlocks: PropTypes.bool,
   workflowClassName: PropTypes.string,
@@ -62,6 +92,7 @@ const defaultProps = {
   width: '100%',
   height: '100%',
   blocks: testingBlocks,
+  paths: testingPaths,
   gridSize: 20,
   allowAdjacentBlocks: false,
   workflowClassName: '',

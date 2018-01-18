@@ -5,7 +5,7 @@
  * @param {Object} block2 - Second block to compare.
  * @param {number} gridSize - Size of workspace grid.
  * @param {boolean} allowContact - If false, blocks have 1-gridSize buffer.
- * @returns {boolean} - Are these blocks overlapping in the workspace?
+ * @returns {boolean} - True if blocks overlap, false if they do not.
  */
 export const isBlockColliding = (block1, block2, gridSize, allowContact) => (
   block1
