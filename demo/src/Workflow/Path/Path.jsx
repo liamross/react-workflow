@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getBlockMidpoint } from '../Utilities/workflowUtils';
+import {
+  getBlockMidpoint, getPathBlockIntersection,
+} from '../Utilities/workflowUtils';
 
 import './Path.scss';
 
@@ -52,8 +54,25 @@ function Path({
   points,
   className,
 }) {
-  const startPoint = getBlockMidpoint(startBlock);
-  const endPoint = getBlockMidpoint(endBlock);
+  // const DRAG_GROWTH = 6;
+  // const endBlockX = endBlock.x - DRAG_GROWTH / 2;
+  // const endBlockY = endBlock.y - DRAG_GROWTH / 2;
+  // const endBlockW = endBlock.width + DRAG_GROWTH;
+  // const endBlockH = endBlock.height + DRAG_GROWTH;
+
+  // const endBlockOutline = {
+  //   x: endBlockX,
+  //   y: endBlockY,
+  //   width: endBlockW,
+  //   height: endBlockH,
+  // }
+
+  const startMidPoint = getBlockMidpoint(startBlock);
+  const endMidPoint = getBlockMidpoint(endBlock);
+
+  const startPoint = getPathBlockIntersection(startMidPoint, endMidPoint, startBlock);
+  const endPoint = getPathBlockIntersection(endMidPoint, startMidPoint, endBlock);
+
   const dString = (
     `M ${startPoint.x} ${startPoint.y} ${
     points.map(point => `L ${point.x} ${point.y} `).join()
@@ -75,10 +94,11 @@ function Path({
       <path
         className="WorkflowPath__line"
         fill="none"
-        stroke="#555"
-        strokeWidth="4px"
+        stroke="#333"
+        strokeWidth="2px"
         strokeLinecap="round"
         d={dString}
+        markerEnd="url(#_arrow)"
       />
     </g>
   );

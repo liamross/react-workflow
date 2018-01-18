@@ -279,6 +279,17 @@ class Workspace extends PureComponent {
               strokeWidth="0.5"
             />
           </pattern>
+          <marker
+            id="_arrow"
+            markerWidth="9"
+            markerHeight="6"
+            refX="8"
+            refY="3"
+            orient="auto"
+            markerUnits="strokeWidth"
+          >
+            <path d="M 0 0 L 0 6 L 9 3 Z" fill="#333" />
+          </marker>
         </defs>
         <rect
           className="WorkflowWorkspace__grid"
