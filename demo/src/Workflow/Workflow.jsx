@@ -43,15 +43,21 @@ const testingPaths = [
   {
     title: 'Path 1',
     id: 'path-1',
+    startBlockId: 'block-1',
+    endBlockId: 'block-2',
     points: [
-      {
-        x: 20,
-        y: 20,
-      },
-      {
-        x: 20,
-        y: 90,
-      },
+      // {
+      //   x: 20,
+      //   y: 20,
+      // },
+      // {
+      //   x: 80,
+      //   y: 20,
+      // },
+      // {
+      //   x: 80,
+      //   y: 20,
+      // },
     ],
   }
 ];
@@ -69,13 +75,14 @@ const propTypes = {
       height: PropTypes.number,
     }),
   ),
-
   paths: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
       id: PropTypes.string,
+      startBlockId: PropTypes.string,
+      endBlockId: PropTypes.string,
       points: PropTypes.arrayOf(
-        PropTypes.shape({
+        PropTypes.arrayOf({
           x: PropTypes.number,
           y: PropTypes.number,
         }),

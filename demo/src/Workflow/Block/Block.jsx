@@ -48,7 +48,7 @@ function Block({
 
   return (
     <g
-      className={'WorkflowBlock _draggable'
+      className={'WorkflowBlock __block'
         + (isSelected ? ' WorkflowBlock--selected' : '')
         + (isDragging ? ' WorkflowBlock--dragging' : '')
         + (isInvalid ? ' WorkflowBlock--invalid' : '')

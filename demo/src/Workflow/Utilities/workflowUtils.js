@@ -40,3 +40,14 @@ export const blockToFront = (id, blocks) => {
     return 0;
   });
 };
+
+/**
+ * Find the coordinates of a block's midpoint.
+ * @param {Object} block - Block to find midpoint of.
+ * @param {number} gridSize - Grid size for rounding, no rounding if none given.
+ */
+export const getBlockMidpoint = (block, gridSize = 0) => {
+  const x = roundToNearest(block.x + block.width / 2, gridSize);
+  const y = roundToNearest(block.y + block.height / 2, gridSize);
+  return {x, y};
+}

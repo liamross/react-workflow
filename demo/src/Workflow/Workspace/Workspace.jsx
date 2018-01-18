@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Block } from '../Block/Block';
+import { Path } from '../Path/Path';
 import {
   isBlockColliding, roundToNearest, blockToFront,
 } from '../Utilities/workflowUtils';
@@ -25,6 +26,8 @@ const propTypes = {
     PropTypes.shape({
       title: PropTypes.string,
       id: PropTypes.string,
+      startBlockId: PropTypes.string,
+      endBlockId: PropTypes.string,
       points: PropTypes.arrayOf(
         PropTypes.shape({
           x: PropTypes.number,
@@ -46,6 +49,7 @@ class Workspace extends PureComponent {
 
     this.state = {
       blocks: props.blocks,
+      paths: props.paths,
       selected: '',
       dragging: '',
       cursorOutsideWorkspace: false,
@@ -64,6 +68,7 @@ class Workspace extends PureComponent {
     this.setState({
       ...this.state,
       blocks: nextProps.blocks,
+      paths: nextProps.paths,
     });
   }
 
@@ -78,7 +83,7 @@ class Workspace extends PureComponent {
     const target = evt.target.parentElement;
     const targetClass = target.getAttribute('class');
 
-    if (targetClass && targetClass.includes('_draggable')) {
+    if (targetClass && targetClass.includes('__block')) {
       // If click is on draggable component, begin dragging, remove selection,
       // and set dragged block to top (bottom of blocks array).
       const targetId = target.getAttribute('id');
@@ -242,6 +247,7 @@ class Workspace extends PureComponent {
   render() {
     const {
       blocks,
+      paths,
       selected,
       dragging,
       cursorOutsideWorkspace,
@@ -280,6 +286,16 @@ class Workspace extends PureComponent {
           height="100%"
           fill="url(#_grid)"
         />
+        {paths.map(path => {
+          return (
+            <Path
+              key={path.id}
+              startBlock={blocks.find(bl => bl.id === path.startBlockId)}
+              endBlock={blocks.find(bl => bl.id === path.endBlockId)}
+              {...path}
+            />
+          );
+        })}
         {blocks.map(block => {
           const isSelected = selected === block.id;
           const isDragging = dragging === block.id;
