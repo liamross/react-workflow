@@ -1,0 +1,43 @@
+.WorkflowBlock {
+  cursor: move;
+
+  &__background {
+    fill: #666;
+    stroke: #333;
+    stroke-width: 1;
+  }
+
+  &__text {
+    fill: #333;
+    user-select: none;
+  }
+
+  &--selected {
+    .WorkflowBlock__background {
+      stroke: #000;
+      stroke-width: 4;
+    }
+  }
+
+  &--dragging {
+    .WorkflowBlock__background {
+      fill-opacity: 0.8;
+      stroke-opacity: 0.8;
+    }
+
+    .WorkflowBlock__text {
+      fill-opacity: 0.8;
+    }
+  }
+
+  &--invalid {
+    .WorkflowBlock__background {
+      fill: #654;
+      stroke: #600;
+    }
+
+    .WorkflowBlock__text {
+      fill: #600;
+    }
+  }
+}
