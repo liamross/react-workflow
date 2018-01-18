@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './Block.scss';
 
 const propTypes = {
-  //
+  // Required.
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
@@ -14,7 +14,7 @@ const propTypes = {
   y: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  //
+  // Not Required.
   className: PropTypes.string,
 };
 

@@ -5,43 +5,10 @@ import { isBlockColliding, roundToNearest, setIdToTop } from './workflowUtils';
 
 import './Workspace.scss';
 
-const testingBlocks = [
-  {
-    title: 'Title 1',
-    id: '1',
-    x: 160,
-    y: 160,
-    width: 120,
-    height: 80,
-  },
-  {
-    title: 'Title 2',
-    id: '2',
-    x: 300,
-    y: 300,
-    width: 120,
-    height: 80,
-  },
-  {
-    title: 'Title 3',
-    id: '3',
-    x: 460,
-    y: 160,
-    width: 120,
-    height: 80,
-  },
-  {
-    title: 'Title 4',
-    id: '4',
-    x: 600,
-    y: 300,
-    width: 120,
-    height: 80,
-  },
-];
-
 // TODO: add some form of submission.
 const propTypes = {
+  width: PropTypes.string.isRequired,
+  height: PropTypes.string.isRequired,
   blocks: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
@@ -51,16 +18,13 @@ const propTypes = {
       width: PropTypes.number,
       height: PropTypes.number,
     }),
-  ),
-  gridSize: PropTypes.number,
-  allowAdjacentBlocks: PropTypes.bool,
+  ).isRequired,
+  gridSize: PropTypes.number.isRequired,
+  allowAdjacentBlocks: PropTypes.bool.isRequired,
+  workspaceClassName: PropTypes.string.isRequired,
 };
 
-const defaultProps = {
-  blocks: testingBlocks,
-  gridSize: 20,
-  allowAdjacentBlocks: false,
-};
+const defaultProps = {};
 
 class Workspace extends PureComponent {
   constructor(props) {
@@ -197,7 +161,7 @@ class Workspace extends PureComponent {
       blocks,
       dragging,
       cursorOutsideWorkspace,
-      isOverlapping
+      isOverlapping,
     } = this.state;
     const isInvalid = cursorOutsideWorkspace || isOverlapping;
 
@@ -262,14 +226,32 @@ class Workspace extends PureComponent {
   };
 
   render() {
-    const { blocks, selected, dragging, cursorOutsideWorkspace, isOverlapping } = this.state;
+    const {
+      blocks,
+      selected,
+      dragging,
+      cursorOutsideWorkspace,
+      isOverlapping,
+    } = this.state;
+    const { width, height, workspaceClassName } = this.props;
     const isInvalid = cursorOutsideWorkspace || isOverlapping;
     return (
       <svg
-        className="WorkflowWorkspace"
+        className={'WorkflowWorkspace'
+        + (workspaceClassName ? ' ' + workspaceClassName : '')
+        }
+        width={width}
+        height={height}
         onMouseDown={this.handleMouseDown}
         ref={ref => this.workspace = ref}
       >
+        <rect
+          className="WorkflowWorkspace__fill"
+          x={0}
+          y={0}
+          width={width}
+          height={height}
+        />
         {blocks.map(block => {
           const isSelected = selected === block.id;
           const isDragging = dragging === block.id;

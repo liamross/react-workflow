@@ -16,39 +16,45 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-          <file leaf-file-name="Block.jsx" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Workflow/Block.jsx">
+          <file leaf-file-name="Workspace.jsx" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace.jsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="321">
-                  <caret line="39" column="55" lean-forward="true" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
+                <state relative-caret-position="560">
+                  <caret line="16" column="26" lean-forward="true" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
                   <folding>
-                    <element signature="e#0#26#0" expanded="true" />
-                    <marker date="1516265153566" expanded="true" signature="655:1766" ph="{...}" />
-                    <marker date="1516265153566" expanded="true" signature="1560:1759" ph="&lt;g/&gt;" />
-                    <marker date="1516265153566" expanded="true" signature="1560:1574" ph="&lt;rect/&gt;" />
-                    <marker date="1516265153566" expanded="true" signature="1581:1750" ph="&lt;text/&gt;" />
+                    <element signature="e#0#45#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.scss" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/index.scss">
+          <file leaf-file-name="Shapes.jsx" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Workflow/Shapes.jsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                <state relative-caret-position="140">
+                  <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Workspace.jsx" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace.jsx">
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Workflow/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="945">
-                  <caret line="27" column="11" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+                <state relative-caret-position="105">
+                  <caret line="3" column="24" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/index.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="315">
+                  <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
                   <folding>
-                    <element signature="e#0#45#0" expanded="true" />
+                    <element signature="e#0#26#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -58,11 +64,21 @@
       </split-first>
       <split-second>
         <leaf>
+          <file leaf-file-name="index.scss" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/index.scss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="735">
+                  <caret line="21" column="18" lean-forward="false" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="Block.jsx" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Workflow/Block.jsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="630">
-                  <caret line="39" column="57" lean-forward="true" selection-start-line="39" selection-start-column="57" selection-end-line="39" selection-end-column="57" />
+                <state relative-caret-position="770">
+                  <caret line="55" column="7" lean-forward="true" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                   </folding>
@@ -90,11 +106,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Block.scss" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Block.scss" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Workflow/Block.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="560">
-                  <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+                <state relative-caret-position="840">
+                  <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
                   <folding />
                 </state>
               </provider>
@@ -103,8 +119,30 @@
           <file leaf-file-name="Workspace.scss" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="280">
-                  <caret line="8" column="3" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+                <state relative-caret-position="35">
+                  <caret line="1" column="25" lean-forward="false" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Workflow.jsx" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Workflow/Workflow.jsx">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="805">
+                  <caret line="67" column="20" lean-forward="false" selection-start-line="67" selection-start-column="2" selection-end-line="67" selection-end-column="20" />
+                  <folding>
+                    <element signature="e#0#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Workflow.scss" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/Workflow/Workflow.scss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -113,6 +151,13 @@
         </leaf>
       </split-second>
     </splitter>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JSX React File (Stateless)" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -137,6 +182,7 @@
       <find>blocks</find>
       <find>rectH</find>
       <find>selection</find>
+      <find>className</find>
     </findStrings>
     <replaceStrings>
       <replace>block</replace>
@@ -151,6 +197,7 @@
       <replace>Block</replace>
       <replace>onSubmit</replace>
       <replace>objectH</replace>
+      <replace>workspaceClassName</replace>
     </replaceStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -166,10 +213,15 @@
         <option value="$PROJECT_DIR$/src/Workflow/WorkflowBlock.jsx" />
         <option value="$PROJECT_DIR$/src/Workflow/workflowUtils.js" />
         <option value="$PROJECT_DIR$/src/Workflow/WorkflowWorkspace.jsx" />
-        <option value="$PROJECT_DIR$/src/Workflow/Block.jsx" />
-        <option value="$PROJECT_DIR$/src/Workflow/Workspace.scss" />
         <option value="$PROJECT_DIR$/src/Workflow/Block.scss" />
+        <option value="$PROJECT_DIR$/src/Workflow/Block.jsx" />
+        <option value="$PROJECT_DIR$/src/Workflow/Shapes.jsx" />
+        <option value="$PROJECT_DIR$/src/Workflow/index.js" />
+        <option value="$PROJECT_DIR$/src/Workflow/Workspace.scss" />
+        <option value="$PROJECT_DIR$/src/Workflow/Workflow.jsx" />
+        <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/Workflow/Workspace.jsx" />
+        <option value="$PROJECT_DIR$/src/index.scss" />
       </list>
     </option>
   </component>
@@ -278,12 +330,12 @@
       <updated>1516239625159</updated>
       <workItem from="1516239626470" duration="198000" />
       <workItem from="1516240270718" duration="14000" />
-      <workItem from="1516241685160" duration="23937000" />
+      <workItem from="1516241685160" duration="26626000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24149000" />
+    <option name="totallyTimeSpent" value="26838000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -335,10 +387,6 @@
           <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1516265153566" expanded="true" signature="655:1766" ph="{...}" />
-            <marker date="1516265153566" expanded="true" signature="1560:1759" ph="&lt;g/&gt;" />
-            <marker date="1516265153566" expanded="true" signature="1560:1574" ph="&lt;rect/&gt;" />
-            <marker date="1516265153566" expanded="true" signature="1581:1750" ph="&lt;text/&gt;" />
           </folding>
         </state>
       </provider>
@@ -357,10 +405,6 @@
           <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1516265153566" expanded="true" signature="655:1766" ph="{...}" />
-            <marker date="1516265153566" expanded="true" signature="1560:1759" ph="&lt;g/&gt;" />
-            <marker date="1516265153566" expanded="true" signature="1560:1574" ph="&lt;rect/&gt;" />
-            <marker date="1516265153566" expanded="true" signature="1581:1750" ph="&lt;text/&gt;" />
           </folding>
         </state>
       </provider>
@@ -472,16 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#26#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="980">
@@ -506,14 +540,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Workflow/workflowUtils.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
@@ -522,40 +548,88 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Workflow/Block.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="8" column="3" lean-forward="false" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+        <state relative-caret-position="35">
+          <caret line="1" column="25" lean-forward="false" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Workflow/Workflow.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Workflow/Shapes.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Workflow/Workflow.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="805">
+          <caret line="67" column="20" lean-forward="false" selection-start-line="67" selection-start-column="2" selection-end-line="67" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Workflow/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="3" column="24" lean-forward="true" selection-start-line="3" selection-start-column="24" selection-end-line="3" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Workflow/Block.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="39" column="55" lean-forward="true" selection-start-line="39" selection-start-column="55" selection-end-line="39" selection-end-column="55" />
+        <state relative-caret-position="770">
+          <caret line="55" column="7" lean-forward="true" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1516265153566" expanded="true" signature="655:1766" ph="{...}" />
-            <marker date="1516265153566" expanded="true" signature="1560:1759" ph="&lt;g/&gt;" />
-            <marker date="1516265153566" expanded="true" signature="1560:1574" ph="&lt;rect/&gt;" />
-            <marker date="1516265153566" expanded="true" signature="1581:1750" ph="&lt;text/&gt;" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Workflow/Block.scss">
+    <entry file="file://$PROJECT_DIR$/src/index.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="16" column="20" lean-forward="true" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
+        <state relative-caret-position="735">
+          <caret line="21" column="18" lean-forward="false" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="27" column="11" lean-forward="true" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+        <state relative-caret-position="560">
+          <caret line="16" column="26" lean-forward="true" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
