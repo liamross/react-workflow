@@ -105,6 +105,7 @@ const defaultProps = {
 function Workflow(props) {
   return (
     <div
+      id="_workflow"
       className={'Workflow'
       + (props.workflowClassName ? ' ' + props.workflowClassName : '')
       }

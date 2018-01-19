@@ -65,7 +65,7 @@ class Workspace extends PureComponent {
 
     // Keeps track of original mouse and block coordinates.
     this.originalMouseCoordinates = {}; // {x: number, y: number}
-    this.originalBlockCoordinates = {}; // {x: number, y: number}
+    this.originalWorkspaceCoordinates = {}; // {x: number, y: number}
   }
 
   componentWillReceiveProps(nextProps) {
@@ -103,10 +103,10 @@ class Workspace extends PureComponent {
       this.originalMouseCoordinates.x = evt.clientX;
       this.originalMouseCoordinates.y = evt.clientY;
 
-      // Store original block coordinates (to nearest grid).
+      // Store original workspace coordinate coordinates (to nearest grid).
       const block = blocks.find(bl => bl.id === targetId);
-      this.originalBlockCoordinates.x = roundToNearest(block.x, gridSize);
-      this.originalBlockCoordinates.y = roundToNearest(block.y, gridSize);
+      this.originalWorkspaceCoordinates.x = roundToNearest(block.x, gridSize);
+      this.originalWorkspaceCoordinates.y = roundToNearest(block.y, gridSize);
 
       // Initialize mouse listeners for document and workspace.
       document.addEventListener('mousemove', this.handleBlockDrag);
@@ -134,11 +134,11 @@ class Workspace extends PureComponent {
       const mouseDeltaY = this.originalMouseCoordinates.y - evt.clientY;
 
       // Find new block coordinates (round mouse delta).
-      const blockX = this.originalBlockCoordinates.x - roundToNearest(
+      const blockX = this.originalWorkspaceCoordinates.x - roundToNearest(
         mouseDeltaX,
         gridSize,
       );
-      const blockY = this.originalBlockCoordinates.y - roundToNearest(
+      const blockY = this.originalWorkspaceCoordinates.y - roundToNearest(
         mouseDeltaY,
         gridSize,
       );
@@ -199,8 +199,8 @@ class Workspace extends PureComponent {
         blocks: blocks.map(block => block.id === dragging
           ? {
             ...block,
-            x: this.originalBlockCoordinates.x,
-            y: this.originalBlockCoordinates.y,
+            x: this.originalWorkspaceCoordinates.x,
+            y: this.originalWorkspaceCoordinates.y,
           }
           : block,
         ),
@@ -222,6 +222,15 @@ class Workspace extends PureComponent {
   handlePathMouseDown = (evt, id) => {
     const { gridSize } = this.props;
 
+    // Store a set of original workspace coordinates.
+    const workflow = document.getElementById('_workflow');
+    this.originalWorkspaceCoordinates.x = workflow.scrollLeft;
+    this.originalWorkspaceCoordinates.y = workflow.scrollTop;
+
+    // Get relative workspace position.
+    const actualX = evt.clientX + this.originalWorkspaceCoordinates.x;
+    const actualY = evt.clientY + this.originalWorkspaceCoordinates.y;
+
     // Set temporary path.
     this.setState({
       ...this.state,
@@ -230,8 +239,8 @@ class Workspace extends PureComponent {
         startBlockId: id,
         endBlockId: '',
         mouse: {
-          x: roundToNearest(evt.clientX, gridSize),
-          y: roundToNearest(evt.clientY, gridSize),
+          x: roundToNearest(actualX, gridSize),
+          y: roundToNearest(actualY, gridSize),
         },
         points: [],
       },
@@ -246,11 +255,15 @@ class Workspace extends PureComponent {
     const { gridSize } = this.props;
     const { blocks, tempPath } = this.state;
 
+    // Get relative workspace position.
+    const actualX = evt.clientX + this.originalWorkspaceCoordinates.x;
+    const actualY = evt.clientY + this.originalWorkspaceCoordinates.y;
+
     if (tempPath) {
       // Check if dragged block is overlapping.
       const draggedPath = {
-        x: evt.clientX,
-        y: evt.clientY,
+        x: actualX,
+        y: actualY,
         width: 1,
         height: 1,
       };
@@ -270,8 +283,8 @@ class Workspace extends PureComponent {
         tempPath: {
           ...tempPath,
           mouse: {
-            x: roundToNearest(evt.clientX, gridSize),
-            y: roundToNearest(evt.clientY, gridSize),
+            x: roundToNearest(actualX, gridSize),
+            y: roundToNearest(actualY, gridSize),
           },
           endBlockId: endBlock ? endBlock.id : '',
         },
@@ -383,7 +396,7 @@ class Workspace extends PureComponent {
 
     // Reset coordinates.
     this.originalMouseCoordinates = {};
-    this.originalBlockCoordinates = {};
+    this.originalWorkspaceCoordinates = {};
   };
 
   render() {
