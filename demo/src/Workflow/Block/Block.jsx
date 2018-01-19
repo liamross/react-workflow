@@ -74,15 +74,31 @@ function Block({
               r={width / 2}
             />
           )
-          : (
-            <rect
-              className="WorkflowBlock__background"
-              x={x}
-              y={y}
-              width={width}
-              height={height}
-            />
-          )
+          : shape === WorkflowShapes.Diamond
+            ? (
+              <polygon
+                className="WorkflowBlock__background"
+                points={`${
+                  x + width / 2
+                  },${
+                  y
+                  } ${
+                  x
+                  },${
+                  y + height / 2
+                  } ${
+                    x + width / 2
+                  },${
+                    y + height
+                  } ${
+                    x + width
+                  },${
+                    y + height / 2
+                  }`
+                }
+              />
+            )
+            : ''
       }
       <text
         className="WorkflowBlock__text"
