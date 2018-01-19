@@ -13,6 +13,8 @@ const propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
   }),
+  onDelete: PropTypes.func.isRequired,
+  onNewPath: PropTypes.func.isRequired,
   // onCreatePath: PropTypes.func.isRequired,
   // onWidthChange: PropTypes.func.isRequired,
 };
@@ -23,13 +25,15 @@ const defaultProps = {
 
 class BlockOverlay extends PureComponent {
   handleDelete = evt => {
+    const { onDelete, selectedBlock } = this.props;
     evt.stopPropagation();
-    console.log('Delete node')
+    onDelete(selectedBlock.id);
   };
 
   handleNewPath = evt => {
+    const { onNewPath, selectedBlock } = this.props;
     evt.stopPropagation();
-    console.log('New path')
+    onNewPath(evt, selectedBlock.id);
   };
 
   render() {

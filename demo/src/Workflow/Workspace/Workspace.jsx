@@ -81,7 +81,7 @@ class Workspace extends PureComponent {
     this.resetDrag();
   }
 
-  handleMouseDown = evt => {
+  handleBlockMouseDown = evt => {
     const { gridSize } = this.props;
     const { blocks } = this.state;
     const target = evt.target.parentElement;
@@ -109,8 +109,8 @@ class Workspace extends PureComponent {
       this.originalBlockCoordinates.y = roundToNearest(block.y, gridSize);
 
       // Initialize mouse listeners for document and workspace.
-      document.addEventListener('mousemove', this.handleMouseMove);
-      document.addEventListener('mouseup', this.handleMouseUp);
+      document.addEventListener('mousemove', this.handleBlockDrag);
+      document.addEventListener('mouseup', this.handleBlockPlace);
       if (this.workspace) {
         this.workspace.addEventListener('mouseleave', this.handleMouseLeave);
         this.workspace.addEventListener('mouseenter', this.handleMouseEnter);
@@ -124,7 +124,7 @@ class Workspace extends PureComponent {
     }
   };
 
-  handleMouseMove = evt => {
+  handleBlockDrag = evt => {
     const { gridSize, allowAdjacentBlocks } = this.props;
     const { blocks, dragging } = this.state;
 
@@ -145,7 +145,7 @@ class Workspace extends PureComponent {
 
       // Check if dragged block is overlapping.
       const currentBlockIndex = blocks.findIndex(bl => bl.id === dragging);
-      const newBlock = {
+      const draggedBlock = {
         ...blocks[currentBlockIndex],
         x: blockX,
         y: blockY,
@@ -153,7 +153,7 @@ class Workspace extends PureComponent {
       const isOverlapping = blocks.some((block, index) => (
         index !== currentBlockIndex
         && isBlockColliding(
-          newBlock,
+          draggedBlock,
           block,
           gridSize,
           allowAdjacentBlocks,
@@ -164,13 +164,12 @@ class Workspace extends PureComponent {
         ...this.state,
         blocks: [
           ...blocks.slice(0, currentBlockIndex),
-          newBlock,
+          draggedBlock,
           ...blocks.slice(currentBlockIndex + 1),
         ],
         isOverlapping,
       });
     } else {
-      // Remove listeners and reset coordinates.
       console.error(
         'Not in dragging state.'
         + '\nThis is likely an async issue...'
@@ -179,7 +178,7 @@ class Workspace extends PureComponent {
     }
   };
 
-  handleMouseUp = () => {
+  handleBlockPlace = () => {
     const {
       blocks,
       dragging,
@@ -220,6 +219,100 @@ class Workspace extends PureComponent {
     this.resetDrag();
   };
 
+  handlePathMouseDown = (evt, id) => {
+    const { gridSize } = this.props;
+
+    // Set temporary path.
+    this.setState({
+      ...this.state,
+      selected: '',
+      tempPath: {
+        title: '',
+        startBlockId: id,
+        endBlockId: '',
+        mouse: {
+          x: roundToNearest(evt.clientX, gridSize),
+          y: roundToNearest(evt.clientY, gridSize),
+        },
+        points: [],
+      },
+    });
+
+    // Initialize mouse listeners for document and workspace.
+    document.addEventListener('mousemove', this.handlePathDrag);
+    document.addEventListener('mouseup', this.handlePathPlace);
+  };
+
+  handlePathDrag = evt => {
+    const { gridSize } = this.props;
+    const { blocks, tempPath } = this.state;
+
+    if (tempPath) {
+      // Check if dragged block is overlapping.
+      const draggedPath = {
+        x: evt.clientX,
+        y: evt.clientY,
+        width: 1,
+        height: 1,
+      };
+
+      const endBlock = blocks.find(block => (
+        block.id !== tempPath.startBlockId
+        && isBlockColliding(
+          draggedPath,
+          block,
+          gridSize,
+          false,
+        )
+      ));
+
+      this.setState({
+        ...this.state,
+        tempPath: {
+          ...tempPath,
+          mouse: {
+            x: roundToNearest(evt.clientX, gridSize),
+            y: roundToNearest(evt.clientY, gridSize),
+          },
+          endBlockId: endBlock ? endBlock.id : '',
+        },
+      });
+    } else {
+      console.error(
+        'No temp path.'
+        + '\nThis is likely an async issue...'
+        + '\nCurrent state:\n', this.state,
+      );
+    }
+  };
+
+  handlePathPlace = () => {
+    const { tempPath, paths } = this.state;
+
+    if (tempPath && tempPath.endBlockId) {
+      this.setState({
+        ...this.state,
+        tempPath: null,
+        paths: [
+          ...paths,
+          {
+            ...tempPath,
+            id: String(Math.ceil(Math.random() * 100000)),
+            mouse: undefined,
+          }
+        ],
+      })
+    } else {
+      this.setState({
+        ...this.state,
+        tempPath: null,
+      })
+    }
+
+    // Remove listeners and reset coordinates.
+    this.resetDrag();
+  };
+
   handleMouseEnter = () => {
     this.setState({
       ...this.state,
@@ -234,10 +327,45 @@ class Workspace extends PureComponent {
     });
   };
 
+  onBlockDelete = id => {
+    const { blocks, paths } = this.state;
+
+    // Find index of block to delete.
+    const index = blocks.findIndex(blk => blk.id === id);
+
+    // Find all paths that link to block and delete them from paths array.
+    let pathIndexesToDelete = [];
+    let trimmedPaths = paths.slice();
+    trimmedPaths.forEach((path, index) => {
+      if (path.startBlockId === id || path.endBlockId === id) {
+        pathIndexesToDelete.push(index);
+      }
+    });
+    pathIndexesToDelete.reverse();
+    pathIndexesToDelete.forEach(indexToDelete => {
+      trimmedPaths.splice(indexToDelete, 1);
+    });
+
+    this.setState({
+      ...this.state,
+      blocks: [
+        ...blocks.slice(0, index),
+        ...blocks.slice(index + 1),
+      ],
+      paths: trimmedPaths,
+    })
+  };
+
+  onPathDelete = id => {
+    console.log('on path delete: ', id);
+  };
+
   resetDrag = () => {
     // Remove listeners.
-    document.removeEventListener('mousemove', this.handleMouseMove);
-    document.removeEventListener('mouseup', this.handleMouseUp);
+    document.removeEventListener('mousemove', this.handleBlockDrag);
+    document.removeEventListener('mouseup', this.handleBlockPlace);
+    document.removeEventListener('mousemove', this.handlePathDrag);
+    document.removeEventListener('mouseup', this.handlePathPlace);
     if (this.workspace) {
       this.workspace.removeEventListener('mouseleave', this.handleMouseLeave);
       this.workspace.removeEventListener('mouseenter', this.handleMouseEnter);
@@ -269,7 +397,7 @@ class Workspace extends PureComponent {
           width: width,
           height: height,
         }}
-        onMouseDown={this.handleMouseDown}
+        onMouseDown={this.handleBlockMouseDown}
         ref={ref => this.workspace = ref}
       >
         <svg
@@ -334,6 +462,7 @@ class Workspace extends PureComponent {
             return (
               <Path
                 key={path.id}
+                onDelete={this.onPathDelete}
                 startBlock={blocks.find(bl => bl.id === path.startBlockId)}
                 endBlock={blocks.find(bl => bl.id === path.endBlockId)}
                 {...path}
@@ -343,8 +472,10 @@ class Workspace extends PureComponent {
           {tempPath
             ? (
               <Path
-                key="_tempPath"
+                id="_tempPath"
+                onDelete={this.onPathDelete}
                 startBlock={blocks.find(bl => bl.id === tempPath.startBlockId)}
+                endBlock={blocks.find(bl => bl.id === tempPath.endBlockId)}
                 {...tempPath}
               />
             )
@@ -369,6 +500,8 @@ class Workspace extends PureComponent {
             ? blocks.find(bl => bl.id === selected)
             : undefined
           }
+          onDelete={this.onBlockDelete}
+          onNewPath={this.handlePathMouseDown}
         />
       </div>
     );

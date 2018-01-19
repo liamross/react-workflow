@@ -18,6 +18,7 @@ const propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
   }).isRequired,
+  onDelete: PropTypes.func.isRequired,
   endBlock: PropTypes.shape({
     title: PropTypes.string,
     id: PropTypes.string,
@@ -53,6 +54,7 @@ function Path({
   title,
   id,
   startBlock,
+  onDelete,
   endBlock,
   mouse,
   // isSelected,
@@ -82,7 +84,7 @@ function Path({
       height: 1,
     }
   } else {
-    console.error('No mouse input, or end block.')
+    console.error('no mouse input or end block provided')
   }
 
   // Get midpoint of both start and end blocks.

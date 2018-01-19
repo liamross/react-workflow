@@ -16,12 +16,14 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="525">
-          <file leaf-file-name="index.scss" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/index.scss">
+          <file leaf-file-name="Workspace.jsx" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/Workspace.jsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="700">
-                  <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-                  <folding />
+                <state relative-caret-position="776">
+                  <caret line="477" column="75" lean-forward="true" selection-start-line="477" selection-start-column="75" selection-end-line="477" selection-end-column="75" />
+                  <folding>
+                    <element signature="e#0#45#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -29,8 +31,18 @@
           <file leaf-file-name="workflowUtils.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Workflow/Utilities/workflowUtils.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="3465">
-                  <caret line="99" column="29" lean-forward="true" selection-start-line="99" selection-start-column="29" selection-end-line="99" selection-end-column="29" />
+                <state relative-caret-position="595">
+                  <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.scss" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/index.scss">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="700">
+                  <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -46,11 +58,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Path.jsx" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Path.jsx" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Workflow/Path/Path.jsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1085">
-                  <caret line="77" column="21" lean-forward="true" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
+                <state relative-caret-position="1505">
+                  <caret line="86" column="57" lean-forward="true" selection-start-line="86" selection-start-column="57" selection-end-line="86" selection-end-column="57" />
                   <folding />
                 </state>
               </provider>
@@ -59,7 +71,7 @@
           <file leaf-file-name="Block.jsx" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Workflow/Block/Block.jsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1400">
+                <state relative-caret-position="1715">
                   <caret line="49" column="13" lean-forward="true" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
@@ -71,8 +83,8 @@
           <file leaf-file-name="BlockOverlay.jsx" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/WorkspaceOverlay/BlockOverlay.jsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="560">
-                  <caret line="31" column="25" lean-forward="false" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+                <state relative-caret-position="875">
+                  <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
                   <folding>
                     <element signature="e#0#45#0" expanded="true" />
                   </folding>
@@ -84,56 +96,14 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="OverlayButton.jsx" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/WorkspaceOverlay/OverlayButton.jsx">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="735">
-                  <caret line="21" column="41" lean-forward="false" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-                  <folding>
-                    <element signature="e#0#26#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="Workspace.jsx" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/Workspace.jsx">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1155">
-                  <caret line="348" column="16" lean-forward="true" selection-start-line="348" selection-start-column="16" selection-end-line="348" selection-end-column="16" />
+                <state relative-caret-position="945">
+                  <caret line="367" column="66" lean-forward="true" selection-start-line="367" selection-start-column="66" selection-end-line="367" selection-end-column="66" />
                   <folding>
                     <element signature="e#0#45#0" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="BlockOverlay.scss" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/WorkspaceOverlay/BlockOverlay.scss">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="420">
-                  <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Block.scss" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Workflow/Block/Block.scss">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="560">
-                  <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Workspace.scss" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/Workspace.scss">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="35">
-                  <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -152,9 +122,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>node</find>
-      <find>console.log</find>
-      <find>rect</find>
       <find>blocks.find</find>
       <find>isInvalid</find>
       <find>block2</find>
@@ -182,6 +149,9 @@
       <find>WorkspaceOverlay</find>
       <find>this.workspace</find>
       <find>endBlockOutline</find>
+      <find>newBlock</find>
+      <find>handleMouseUp</find>
+      <find>math.</find>
     </findStrings>
     <replaceStrings>
       <replace>block</replace>
@@ -206,6 +176,8 @@
       <replace>height</replace>
       <replace>BlockOverlay</replace>
       <replace>endPoint</replace>
+      <replace>draggedBlock</replace>
+      <replace>handleBlockPlace</replace>
     </replaceStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -238,9 +210,9 @@
         <option value="$PROJECT_DIR$/src/Workflow/Workspace/WorkspaceOverlay/OverlayButton.jsx" />
         <option value="$PROJECT_DIR$/src/Workflow/Workspace/WorkspaceOverlay/BlockOverlay.scss" />
         <option value="$PROJECT_DIR$/src/Workflow/Block/Block.scss" />
+        <option value="$PROJECT_DIR$/src/Workflow/Path/Path.jsx" />
         <option value="$PROJECT_DIR$/src/Workflow/Workspace/WorkspaceOverlay/BlockOverlay.jsx" />
         <option value="$PROJECT_DIR$/src/Workflow/Workspace/Workspace.jsx" />
-        <option value="$PROJECT_DIR$/src/Workflow/Path/Path.jsx" />
       </list>
     </option>
   </component>
@@ -386,12 +358,12 @@
       <workItem from="1516239626470" duration="198000" />
       <workItem from="1516240270718" duration="14000" />
       <workItem from="1516241685160" duration="26662000" />
-      <workItem from="1516325890063" duration="14757000" />
+      <workItem from="1516325890063" duration="19902000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41631000" />
+    <option name="totallyTimeSpent" value="46776000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -406,11 +378,11 @@
     <frame x="3828" y="-12" width="3864" height="2114" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20467836" sideWeight="0.68477106" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20467836" sideWeight="0.68477106" order="3" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23109691" sideWeight="0.5079872" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23162939" sideWeight="0.86503553" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.37799042" sideWeight="0.8652313" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20467836" sideWeight="0.31522897" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20467836" sideWeight="0.31522897" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23056443" sideWeight="0.86503553" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18607123" sideWeight="0.49413645" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="left" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.37799042" sideWeight="0.86503553" order="0" side_tool="false" content_ui="tabs" x="39" y="1378" width="3277" height="630" />
@@ -426,6 +398,27 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23138298" sideWeight="0.50261265" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23109691" sideWeight="0.5079872" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2630458" sideWeight="0.86424625" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23162939" sideWeight="0.86503553" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.37799042" sideWeight="0.8652313" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20467836" sideWeight="0.31522897" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23056443" sideWeight="0.86503553" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="left" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.37799042" sideWeight="0.86503553" order="0" side_tool="false" content_ui="tabs" x="39" y="1378" width="3277" height="630" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23162939" sideWeight="0.49738732" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20467836" sideWeight="0.68477106" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23138298" sideWeight="0.50261265" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18607123" sideWeight="0.49413645" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23109691" sideWeight="0.4988345" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -459,7 +452,7 @@
         <state relative-caret-position="175">
           <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -744,7 +737,7 @@
         <state relative-caret-position="385">
           <caret line="11" column="34" lean-forward="true" selection-start-line="11" selection-start-column="34" selection-end-line="11" selection-end-column="34" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -773,9 +766,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/WorkspaceOverlay/OverlayButton.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="21" column="41" lean-forward="false" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Workflow/Block/Block.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1400">
+        <state relative-caret-position="1715">
           <caret line="49" column="13" lean-forward="true" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
@@ -783,20 +786,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/WorkspaceOverlay/OverlayButton.jsx">
+    <entry file="file://$PROJECT_DIR$/src/Workflow/Workflow.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="21" column="41" lean-forward="false" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/Workspace.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35">
-          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+        <state relative-caret-position="420">
+          <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -817,10 +810,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/Workspace.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="1" column="21" lean-forward="false" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/WorkspaceOverlay/BlockOverlay.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="31" column="25" lean-forward="false" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+        <state relative-caret-position="875">
+          <caret line="34" column="26" lean-forward="true" selection-start-line="34" selection-start-column="26" selection-end-line="34" selection-end-column="26" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
@@ -829,35 +830,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Workflow/Utilities/workflowUtils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3465">
-          <caret line="99" column="29" lean-forward="true" selection-start-line="99" selection-start-column="29" selection-end-line="99" selection-end-column="29" />
+        <state relative-caret-position="595">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Workflow/Workflow.jsx">
+    <entry file="file://$PROJECT_DIR$/src/Workflow/Path/Path.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="103" column="0" lean-forward="true" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+        <state relative-caret-position="1505">
+          <caret line="86" column="57" lean-forward="true" selection-start-line="86" selection-start-column="57" selection-end-line="86" selection-end-column="57" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Workflow/Workspace/Workspace.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="348" column="16" lean-forward="true" selection-start-line="348" selection-start-column="16" selection-end-line="348" selection-end-column="16" />
+        <state relative-caret-position="776">
+          <caret line="477" column="75" lean-forward="true" selection-start-line="477" selection-start-column="75" selection-end-line="477" selection-end-column="75" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Workflow/Path/Path.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1085">
-          <caret line="77" column="21" lean-forward="true" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
