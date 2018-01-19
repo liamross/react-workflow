@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Workspace } from './Workspace/Workspace';
+import { WorkflowShapes } from './Block/Shapes';
 
 import './Workflow.scss';
 
@@ -8,6 +9,7 @@ const testingBlocks = [
   {
     title: 'Block 1',
     id: 'block-1',
+    shape: WorkflowShapes.Rectangle,
     x: 160,
     y: 160,
     width: 120,
@@ -16,14 +18,16 @@ const testingBlocks = [
   {
     title: 'Block 2',
     id: 'block-2',
+    shape: WorkflowShapes.Circle,
     x: 300,
     y: 300,
-    width: 120,
+    width: 80,
     height: 80,
   },
   {
     title: 'Block 3',
     id: 'block-3',
+    shape: WorkflowShapes.Rectangle,
     x: 460,
     y: 160,
     width: 120,
@@ -32,6 +36,7 @@ const testingBlocks = [
   {
     title: 'Block 4',
     id: 'block-4',
+    shape: WorkflowShapes.Diamond,
     x: 600,
     y: 300,
     width: 120,

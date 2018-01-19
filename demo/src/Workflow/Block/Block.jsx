@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { WorkflowShapes } from './Shapes';
 
 import './Block.scss';
 
@@ -7,6 +8,7 @@ const propTypes = {
   // Required.
   title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  shape: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
   isDragging: PropTypes.bool.isRequired,
   isHighlighted: PropTypes.bool.isRequired,
@@ -26,6 +28,7 @@ const defaultProps = {
 function Block({
   title,
   id,
+  shape,
   isSelected,
   isDragging,
   isHighlighted,
@@ -52,13 +55,35 @@ function Block({
       }
       id={id}
     >
-      <rect
-        className="WorkflowBlock__background"
-        x={x}
-        y={y}
-        width={width}
-        height={height}
-      />
+      {shape === WorkflowShapes.Rectangle
+        ? (
+          <rect
+            className="WorkflowBlock__background"
+            x={x}
+            y={y}
+            width={width}
+            height={height}
+          />
+        )
+        : shape === WorkflowShapes.Circle
+          ? (
+            <circle
+              className="WorkflowBlock__background"
+              cx={x + width / 2}
+              cy={y + width / 2}
+              r={width / 2}
+            />
+          )
+          : (
+            <rect
+              className="WorkflowBlock__background"
+              x={x}
+              y={y}
+              width={width}
+              height={height}
+            />
+          )
+      }
       <text
         className="WorkflowBlock__text"
         x={fontX}
