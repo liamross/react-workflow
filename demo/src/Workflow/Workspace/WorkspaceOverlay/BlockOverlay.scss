@@ -1,0 +1,45 @@
+$button-size: 20px;
+$overlay-color: #2b88d8;
+
+.OverlayButton {
+  box-sizing: border-box;
+  height: $button-size;
+  width: $button-size;
+  border-radius: ($button-size / 2);
+  position: absolute;
+  border: 1px solid $overlay-color;
+  color: $overlay-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+  cursor: default;
+
+  &:hover {
+    background-color: $overlay-color;
+    color: #f8f8f8;
+  }
+
+  &__icon {
+    user-select: none;
+  }
+}
+
+.BlockOverlay {
+  box-sizing: border-box;
+  position: absolute;
+  border: 1px solid $overlay-color;
+  pointer-events: none;
+
+  &__button {
+    &--NE {
+      top: -($button-size);
+      left: -($button-size);
+    }
+
+    &--SW {
+      bottom: -($button-size);
+      right: -($button-size);
+    }
+  }
+}

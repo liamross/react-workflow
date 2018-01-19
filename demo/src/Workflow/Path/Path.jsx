@@ -25,7 +25,11 @@ const propTypes = {
     y: PropTypes.number,
     width: PropTypes.number,
     height: PropTypes.number,
-  }).isRequired,
+  }),
+  mouse: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+  }),
   // isSelected: PropTypes.bool.isRequired,
   // isDragging: PropTypes.bool.isRequired,
   // isInvalid: PropTypes.bool.isRequired,
@@ -40,6 +44,8 @@ const propTypes = {
 };
 
 const defaultProps = {
+  endBlock: null,
+  mouse: null,
   className: '',
 };
 
@@ -48,29 +54,41 @@ function Path({
   id,
   startBlock,
   endBlock,
+  mouse,
   // isSelected,
   // isDragging,
   // isInvalid,
   points,
   className,
 }) {
-  // Offset the path slightly from the end block to improve arrow appearance.
-  const PATH_END_OFFSET = 8;
-  const endBlockX = endBlock.x - PATH_END_OFFSET / 2;
-  const endBlockY = endBlock.y - PATH_END_OFFSET / 2;
-  const endBlockW = endBlock.width + PATH_END_OFFSET;
-  const endBlockH = endBlock.height + PATH_END_OFFSET;
-  const endBlockOutline = {
-    x: endBlockX,
-    y: endBlockY,
-    width: endBlockW,
-    height: endBlockH,
-  };
+  let endBlockOutline = {};
+  if (endBlock) {
+    // Offset the path slightly from the end block to improve arrow appearance.
+    const PATH_END_OFFSET = 8;
+    const endBlockX = endBlock.x - PATH_END_OFFSET / 2;
+    const endBlockY = endBlock.y - PATH_END_OFFSET / 2;
+    const endBlockW = endBlock.width + PATH_END_OFFSET;
+    const endBlockH = endBlock.height + PATH_END_OFFSET;
+    endBlockOutline = {
+      x: endBlockX,
+      y: endBlockY,
+      width: endBlockW,
+      height: endBlockH,
+    };
+  } else if (mouse) {
+    endBlockOutline = {
+      ...mouse,
+      width: 1,
+      height: 1,
+    }
+  } else {
+    console.error('No mouse input, or end block.')
+  }
 
   // Get midpoint of both start and end blocks.
   const startMidPoint = getBlockMidpoint(startBlock);
   const endMidPoint = getBlockMidpoint(endBlockOutline);
-  
+
   // Get the block-side anchor points for the path.
   const startPoint = getPathBlockIntersection(
     startMidPoint,

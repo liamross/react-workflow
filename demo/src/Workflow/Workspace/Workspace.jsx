@@ -1,9 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Block } from '../Block/Block';
+import { BlockOverlay } from './WorkspaceOverlay/BlockOverlay';
 import { Path } from '../Path/Path';
 import {
-  isBlockColliding, roundToNearest, blockToFront,
+  isBlockColliding,
+  roundToNearest,
+  blockToFront,
 } from '../Utilities/workflowUtils';
 
 import './Workspace.scss';
@@ -50,6 +53,7 @@ class Workspace extends PureComponent {
       height: '900px',
       blocks: props.blocks,
       paths: props.paths,
+      tempPath: null,
       selected: '',
       dragging: '',
       cursorOutsideWorkspace: false,
@@ -250,6 +254,7 @@ class Workspace extends PureComponent {
       height,
       blocks,
       paths,
+      tempPath,
       selected,
       dragging,
       cursorOutsideWorkspace,
@@ -264,6 +269,8 @@ class Workspace extends PureComponent {
           width: width,
           height: height,
         }}
+        onMouseDown={this.handleMouseDown}
+        ref={ref => this.workspace = ref}
       >
         <svg
           className={'WorkflowWorkspace__render'
@@ -271,21 +278,38 @@ class Workspace extends PureComponent {
           }
           width="100%"
           height="100%"
-          onMouseDown={this.handleMouseDown}
-          ref={ref => this.workspace = ref}
         >
           <defs>
+            <pattern
+              id="_subgrid"
+              width={gridSize / 2}
+              height={gridSize / 2}
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d={`M ${gridSize / 2} 0 L 0 0 0 ${gridSize / 2}`}
+                fill="none"
+                stroke="#EEE"
+                strokeWidth="0.5"
+              />
+            </pattern>
             <pattern
               id="_grid"
               width={gridSize}
               height={gridSize}
               patternUnits="userSpaceOnUse"
             >
+              <rect
+                className="WorkflowWorkspace__grid"
+                width="100%"
+                height="100%"
+                fill="url(#_subgrid)"
+              />
               <path
                 d={`M ${gridSize} 0 L 0 0 0 ${gridSize}`}
                 fill="none"
-                stroke="#c8c8c8"
-                strokeWidth="0.5"
+                stroke="#EEE"
+                strokeWidth="1"
               />
             </pattern>
             <marker
@@ -316,6 +340,16 @@ class Workspace extends PureComponent {
               />
             );
           })}
+          {tempPath
+            ? (
+              <Path
+                key="_tempPath"
+                startBlock={blocks.find(bl => bl.id === tempPath.startBlockId)}
+                {...tempPath}
+              />
+            )
+            : ''
+          }
           {blocks.map(block => {
             const isSelected = selected === block.id;
             const isDragging = dragging === block.id;
@@ -330,6 +364,12 @@ class Workspace extends PureComponent {
             );
           })}
         </svg>
+        <BlockOverlay
+          selectedBlock={selected
+            ? blocks.find(bl => bl.id === selected)
+            : undefined
+          }
+        />
       </div>
     );
   }
