@@ -110,24 +110,33 @@ function Path({
       }L ${endPoint.x} ${endPoint.y}`
   );
 
-  /*
-          + (isSelected ? ' WorkflowPath--selected' : '')
-          + (isDragging ? ' WorkflowPath--dragging' : '')
-          + (isInvalid ? ' WorkflowPath--invalid' : '')
-  */
   return (
     <g
       className={'WorkflowPath __path'
+      + (endBlock ? '' : ' WorkflowPath--invalid')
       + (className ? ' ' + className : '')
       }
       id={id}
     >
+      <defs>
+        <marker
+          id="_arrow"
+          markerWidth="10"
+          markerHeight="10"
+          refX="6"
+          refY="5"
+          orient="auto"
+          markerUnits="strokeWidth"
+        >
+          <path
+            d="M 0 0 L 0 10 L 10 5 Z"
+            fill="#333"
+            className="WorkflowPath__arrowhead"
+          />
+        </marker>
+      </defs>
       <path
         className="WorkflowPath__line"
-        fill="none"
-        stroke="#333"
-        strokeWidth="2px"
-        strokeLinecap="round"
         d={dString}
         markerEnd="url(#_arrow)"
       />

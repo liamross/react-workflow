@@ -225,7 +225,6 @@ class Workspace extends PureComponent {
     // Set temporary path.
     this.setState({
       ...this.state,
-      selected: '',
       tempPath: {
         title: '',
         startBlockId: id,
@@ -289,7 +288,18 @@ class Workspace extends PureComponent {
   handlePathPlace = () => {
     const { tempPath, paths } = this.state;
 
-    if (tempPath && tempPath.endBlockId) {
+    const canPlacePath = tempPath
+      && tempPath.endBlockId
+      && (tempPath.endBlockId !== tempPath.startBlockId)
+      && !(paths.some(path => (
+        path.startBlockId === tempPath.startBlockId
+        && path.endBlockId === tempPath.endBlockId
+      )));
+    if (!canPlacePath) {
+      console.warn('Can\'t place path here!');
+    }
+
+    if (canPlacePath) {
       this.setState({
         ...this.state,
         tempPath: null,
@@ -440,17 +450,6 @@ class Workspace extends PureComponent {
                 strokeWidth="1"
               />
             </pattern>
-            <marker
-              id="_arrow"
-              markerWidth="6"
-              markerHeight="6"
-              refX="4"
-              refY="3"
-              orient="auto"
-              markerUnits="strokeWidth"
-            >
-              <path d="M 0 0 L 0 6 L 6 3 Z" fill="#333" />
-            </marker>
           </defs>
           <rect
             className="WorkflowWorkspace__grid"
@@ -490,6 +489,7 @@ class Workspace extends PureComponent {
                 {...block}
                 isSelected={isSelected}
                 isDragging={isDragging}
+                isHighlighted={!!(tempPath && tempPath.endBlockId === block.id)}
                 isInvalid={isInvalid && isDragging}
               />
             );

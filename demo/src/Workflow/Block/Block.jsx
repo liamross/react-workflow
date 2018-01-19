@@ -9,6 +9,7 @@ const propTypes = {
   id: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
   isDragging: PropTypes.bool.isRequired,
+  isHighlighted: PropTypes.bool.isRequired,
   isInvalid: PropTypes.bool.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
@@ -27,6 +28,7 @@ function Block({
   id,
   isSelected,
   isDragging,
+  isHighlighted,
   isInvalid,
   className,
   x,
@@ -44,6 +46,7 @@ function Block({
       className={'WorkflowBlock __block'
         + (isSelected ? ' WorkflowBlock--selected' : '')
         + (isDragging ? ' WorkflowBlock--dragging' : '')
+        + (isHighlighted ? ' WorkflowBlock--highlighted' : '')
         + (isInvalid ? ' WorkflowBlock--invalid' : '')
         + (className ? ' ' + className : '')
       }

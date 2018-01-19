@@ -1,0 +1,14 @@
+.WorkflowPath {
+  &__line {
+    fill: none;
+    stroke: #333;
+    stroke-width: 1px;
+    stroke-linecap: round;
+  }
+
+  &--invalid {
+    .WorkflowPath__line{
+      stroke: #ffb900;
+    }
+  }
+}

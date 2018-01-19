@@ -12,11 +12,12 @@
     user-select: none;
   }
 
-  //&--selected {
-  //  .WorkflowBlock__background {
-  //    fill: #AEAEAE;
-  //  }
-  //}
+  &--highlighted {
+    .WorkflowBlock__background {
+      stroke: #ffb900;
+      stroke-width: 4;
+    }
+  }
 
   &--dragging {
     .WorkflowBlock__background {
