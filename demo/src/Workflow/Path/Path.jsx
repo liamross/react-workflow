@@ -54,29 +54,40 @@ function Path({
   points,
   className,
 }) {
-  // const DRAG_GROWTH = 6;
-  // const endBlockX = endBlock.x - DRAG_GROWTH / 2;
-  // const endBlockY = endBlock.y - DRAG_GROWTH / 2;
-  // const endBlockW = endBlock.width + DRAG_GROWTH;
-  // const endBlockH = endBlock.height + DRAG_GROWTH;
+  // Offset the path slightly from the end block to improve arrow appearance.
+  const PATH_END_OFFSET = 8;
+  const endBlockX = endBlock.x - PATH_END_OFFSET / 2;
+  const endBlockY = endBlock.y - PATH_END_OFFSET / 2;
+  const endBlockW = endBlock.width + PATH_END_OFFSET;
+  const endBlockH = endBlock.height + PATH_END_OFFSET;
+  const endBlockOutline = {
+    x: endBlockX,
+    y: endBlockY,
+    width: endBlockW,
+    height: endBlockH,
+  };
 
-  // const endBlockOutline = {
-  //   x: endBlockX,
-  //   y: endBlockY,
-  //   width: endBlockW,
-  //   height: endBlockH,
-  // }
-
+  // Get midpoint of both start and end blocks.
   const startMidPoint = getBlockMidpoint(startBlock);
-  const endMidPoint = getBlockMidpoint(endBlock);
+  const endMidPoint = getBlockMidpoint(endBlockOutline);
+  
+  // Get the block-side anchor points for the path.
+  const startPoint = getPathBlockIntersection(
+    startMidPoint,
+    points[0] || endMidPoint,
+    startBlock,
+  );
+  const endPoint = getPathBlockIntersection(
+    endMidPoint,
+    points[points.length - 1] || startMidPoint,
+    endBlockOutline,
+  );
 
-  const startPoint = getPathBlockIntersection(startMidPoint, endMidPoint, startBlock);
-  const endPoint = getPathBlockIntersection(endMidPoint, startMidPoint, endBlock);
-
+  // Create svg d string for path.
   const dString = (
     `M ${startPoint.x} ${startPoint.y} ${
-    points.map(point => `L ${point.x} ${point.y} `).join()
-    }L ${endPoint.x} ${endPoint.y}`
+      points.map(point => `L ${point.x} ${point.y} `).join()
+      }L ${endPoint.x} ${endPoint.y}`
   );
 
   /*
@@ -87,7 +98,7 @@ function Path({
   return (
     <g
       className={'WorkflowPath __path'
-        + (className ? ' ' + className : '')
+      + (className ? ' ' + className : '')
       }
       id={id}
     >

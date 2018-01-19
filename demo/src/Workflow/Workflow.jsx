@@ -63,8 +63,6 @@ const testingPaths = [
 ];
 
 const propTypes = {
-  width: PropTypes.string,
-  height: PropTypes.string,
   blocks: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
@@ -96,8 +94,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  width: '100%',
-  height: '100%',
   blocks: testingBlocks,
   paths: testingPaths,
   gridSize: 20,

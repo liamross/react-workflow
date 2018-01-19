@@ -10,8 +10,6 @@ import './Workspace.scss';
 
 // TODO: add some form of submission.
 const propTypes = {
-  width: PropTypes.string.isRequired,
-  height: PropTypes.string.isRequired,
   blocks: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
@@ -48,6 +46,8 @@ class Workspace extends PureComponent {
     super(props);
 
     this.state = {
+      width: '1300px',
+      height: '900px',
       blocks: props.blocks,
       paths: props.paths,
       selected: '',
@@ -246,6 +246,8 @@ class Workspace extends PureComponent {
 
   render() {
     const {
+      width,
+      height,
       blocks,
       paths,
       selected,
@@ -253,74 +255,82 @@ class Workspace extends PureComponent {
       cursorOutsideWorkspace,
       isOverlapping,
     } = this.state;
-    const { gridSize, width, height, workspaceClassName } = this.props;
+    const { gridSize, workspaceClassName } = this.props;
     const isInvalid = cursorOutsideWorkspace || isOverlapping;
     return (
-      <svg
-        className={'WorkflowWorkspace'
-        + (workspaceClassName ? ' ' + workspaceClassName : '')
-        }
-        width={width}
-        height={height}
-        onMouseDown={this.handleMouseDown}
-        ref={ref => this.workspace = ref}
+      <div
+        className="WorkflowWorkspace"
+        style={{
+          width: width,
+          height: height,
+        }}
       >
-        <defs>
-          <pattern
-            id="_grid"
-            width={gridSize}
-            height={gridSize}
-            patternUnits="userSpaceOnUse"
-          >
-            <path
-              d={`M ${gridSize} 0 L 0 0 0 ${gridSize}`}
-              fill="none"
-              stroke="gray"
-              strokeWidth="0.5"
-            />
-          </pattern>
-          <marker
-            id="_arrow"
-            markerWidth="9"
-            markerHeight="6"
-            refX="8"
-            refY="3"
-            orient="auto"
-            markerUnits="strokeWidth"
-          >
-            <path d="M 0 0 L 0 6 L 9 3 Z" fill="#333" />
-          </marker>
-        </defs>
-        <rect
-          className="WorkflowWorkspace__grid"
+        <svg
+          className={'WorkflowWorkspace__render'
+          + (workspaceClassName ? ' ' + workspaceClassName : '')
+          }
           width="100%"
           height="100%"
-          fill="url(#_grid)"
-        />
-        {paths.map(path => {
-          return (
-            <Path
-              key={path.id}
-              startBlock={blocks.find(bl => bl.id === path.startBlockId)}
-              endBlock={blocks.find(bl => bl.id === path.endBlockId)}
-              {...path}
-            />
-          );
-        })}
-        {blocks.map(block => {
-          const isSelected = selected === block.id;
-          const isDragging = dragging === block.id;
-          return (
-            <Block
-              key={block.id}
-              {...block}
-              isSelected={isSelected}
-              isDragging={isDragging}
-              isInvalid={isInvalid && isDragging}
-            />
-          );
-        })}
-      </svg>
+          onMouseDown={this.handleMouseDown}
+          ref={ref => this.workspace = ref}
+        >
+          <defs>
+            <pattern
+              id="_grid"
+              width={gridSize}
+              height={gridSize}
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d={`M ${gridSize} 0 L 0 0 0 ${gridSize}`}
+                fill="none"
+                stroke="#c8c8c8"
+                strokeWidth="0.5"
+              />
+            </pattern>
+            <marker
+              id="_arrow"
+              markerWidth="6"
+              markerHeight="6"
+              refX="4"
+              refY="3"
+              orient="auto"
+              markerUnits="strokeWidth"
+            >
+              <path d="M 0 0 L 0 6 L 6 3 Z" fill="#333" />
+            </marker>
+          </defs>
+          <rect
+            className="WorkflowWorkspace__grid"
+            width="100%"
+            height="100%"
+            fill="url(#_grid)"
+          />
+          {paths.map(path => {
+            return (
+              <Path
+                key={path.id}
+                startBlock={blocks.find(bl => bl.id === path.startBlockId)}
+                endBlock={blocks.find(bl => bl.id === path.endBlockId)}
+                {...path}
+              />
+            );
+          })}
+          {blocks.map(block => {
+            const isSelected = selected === block.id;
+            const isDragging = dragging === block.id;
+            return (
+              <Block
+                key={block.id}
+                {...block}
+                isSelected={isSelected}
+                isDragging={isDragging}
+                isInvalid={isInvalid && isDragging}
+              />
+            );
+          })}
+        </svg>
+      </div>
     );
   }
 }

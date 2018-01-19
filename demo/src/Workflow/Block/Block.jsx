@@ -35,11 +35,11 @@ function Block({
   height,
 }) {
   // Object grows slightly if dragging.
-  const DRAG_GROWTH = 6;
-  const objectX = isDragging ? (x - DRAG_GROWTH / 2) : x;
-  const objectY = isDragging ? (y - DRAG_GROWTH / 2) : y;
-  const objectW = isDragging ? (width + DRAG_GROWTH) : width;
-  const objectH = isDragging ? (height + DRAG_GROWTH) : height;
+  // const DRAG_GROWTH = 2;
+  const objectX = /*isDragging ? (x - DRAG_GROWTH / 2) : */x;
+  const objectY = /*isDragging ? (y - DRAG_GROWTH / 2) : */y;
+  const objectW = /*isDragging ? (width + DRAG_GROWTH) : */width;
+  const objectH = /*isDragging ? (height + DRAG_GROWTH) : */height;
 
   // Set text to center of object.
   const FONT_HEIGHT = 14;
