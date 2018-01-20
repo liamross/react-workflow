@@ -27,3 +27,7 @@ class Library extends PureComponent {
     )
   }
 }
+
+Library.propTypes = propTypes;
+Library.defaultProps = defaultProps;
+export { Library };
