@@ -87,13 +87,13 @@ function Block({
                   },${
                   y + height / 2
                   } ${
-                    x + width / 2
+                  x + width / 2
                   },${
-                    y + height
+                  y + height
                   } ${
-                    x + width
+                  x + width
                   },${
-                    y + height / 2
+                  y + height / 2
                   }`
                 }
               />

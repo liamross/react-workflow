@@ -118,23 +118,6 @@ function Path({
       }
       id={id}
     >
-      <defs>
-        <marker
-          id="_arrow"
-          markerWidth="10"
-          markerHeight="10"
-          refX="6"
-          refY="5"
-          orient="auto"
-          markerUnits="strokeWidth"
-        >
-          <path
-            d="M 0 0 L 0 10 L 10 5 Z"
-            fill="#333"
-            className="WorkflowPath__arrowhead"
-          />
-        </marker>
-      </defs>
       <path
         className="WorkflowPath__line"
         d={dString}
