@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Block } from '../Block/Block';
-import { BlockOverlay } from './WorkspaceOverlay/BlockOverlay';
+import { BlockOverlay } from '../Controls/BlockOverlay';
 import { Path } from '../Path/Path';
 import {
   isBlockColliding,
