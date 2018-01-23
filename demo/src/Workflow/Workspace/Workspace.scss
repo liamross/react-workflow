@@ -1,4 +1,8 @@
 .WorkflowWorkspace {
   position: relative;
   border: 1px solid #999;
+
+  &__grid {
+    pointer-events: none;
+  }
 }

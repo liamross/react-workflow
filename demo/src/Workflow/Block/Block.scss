@@ -1,5 +1,6 @@
 .WorkflowBlock {
-  cursor: move;
+  cursor: grab;
+  user-select: none;
 
   &__background {
     fill: #EAEAEA;
@@ -19,7 +20,13 @@
     }
   }
 
+  &--selected {
+    cursor: grab;
+  }
+
   &--dragging {
+    cursor: grabbing;
+
     .WorkflowBlock__background {
       fill-opacity: 0.6;
       stroke-opacity: 0.6;

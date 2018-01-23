@@ -67,29 +67,60 @@ const testingPaths = [
   }
 ];
 
+// const propTypes = {
+//   blocks: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       title: PropTypes.string,
+//       id: PropTypes.string,
+//       x: PropTypes.number,
+//       y: PropTypes.number,
+//       width: PropTypes.number,
+//       height: PropTypes.number,
+//     }),
+//   ),
+//   paths: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       title: PropTypes.string,
+//       id: PropTypes.string,
+//       startBlockId: PropTypes.string,
+//       endBlockId: PropTypes.string,
+//       points: PropTypes.arrayOf(
+//         PropTypes.arrayOf({
+//           x: PropTypes.number,
+//           y: PropTypes.number,
+//         }),
+//       ),
+//     }),
+//   ),
+//   gridSize: PropTypes.number,
+//   allowAdjacentBlocks: PropTypes.bool,
+//   workflowClassName: PropTypes.string,
+//   workspaceClassName: PropTypes.string,
+// };
+
 const propTypes = {
   blocks: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string,
-      id: PropTypes.string,
-      x: PropTypes.number,
-      y: PropTypes.number,
-      width: PropTypes.number,
-      height: PropTypes.number,
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      x: PropTypes.number.isRequired,
+      y: PropTypes.number.isRequired,
+      type: PropTypes.string.isRequired,
     }),
   ),
   paths: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string,
-      id: PropTypes.string,
-      startBlockId: PropTypes.string,
-      endBlockId: PropTypes.string,
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      source: PropTypes.string.isRequired,
+      target: PropTypes.string.isRequired,
       points: PropTypes.arrayOf(
-        PropTypes.arrayOf({
-          x: PropTypes.number,
-          y: PropTypes.number,
+        PropTypes.shape({
+          x: PropTypes.number.isRequired,
+          y: PropTypes.number.isRequired,
         }),
-      ),
+      ).isRequired,
+      type: PropTypes.string.isRequired,
     }),
   ),
   gridSize: PropTypes.number,
