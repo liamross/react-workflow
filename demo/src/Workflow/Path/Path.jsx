@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {
   getBlockMidpoint, getPathBlockIntersection,
 } from '../Utilities/workflowUtils';
+import { ShapeParameters } from '../Block/Shapes';
 
 import './Path.scss';
 
@@ -54,8 +55,8 @@ function Path({
   title,
   id,
   startBlock,
-  onDelete,
   endBlock,
+  onDelete,
   mouse,
   // isSelected,
   // isDragging,
@@ -65,12 +66,13 @@ function Path({
 }) {
   let endBlockOutline = {};
   if (endBlock) {
+    const { width, height } = ShapeParameters[endBlock.shape];
     // Offset the path slightly from the end block to improve arrow appearance.
     const PATH_END_OFFSET = 8;
     const endBlockX = endBlock.x - PATH_END_OFFSET / 2;
     const endBlockY = endBlock.y - PATH_END_OFFSET / 2;
-    const endBlockW = endBlock.width + PATH_END_OFFSET;
-    const endBlockH = endBlock.height + PATH_END_OFFSET;
+    const endBlockW = width + PATH_END_OFFSET;
+    const endBlockH = height + PATH_END_OFFSET;
     endBlockOutline = {
       x: endBlockX,
       y: endBlockY,

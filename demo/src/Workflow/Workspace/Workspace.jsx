@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Block } from '../Block/Block';
+import { WorkflowShapes } from '../Block/Shapes';
 import { BlockOverlay } from '../Controls/BlockOverlay';
 import { Path } from '../Path/Path';
 import {
@@ -10,31 +11,35 @@ import {
 } from '../Utilities/workflowUtils';
 
 import './Workspace.scss';
+import { elementOffset } from '../Utilities/pageUtils';
 
 // TODO: add some form of submission.
 const propTypes = {
   blocks: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string.isRequired,
       title: PropTypes.string,
-      id: PropTypes.string,
+      shape: PropTypes.oneOf(
+        Object.values(WorkflowShapes),
+      ).isRequired,
       x: PropTypes.number,
       y: PropTypes.number,
-      width: PropTypes.number,
-      height: PropTypes.number,
+      type: PropTypes.string.isRequired,
     }),
   ).isRequired,
   paths: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string.isRequired,
       title: PropTypes.string,
-      id: PropTypes.string,
-      startBlockId: PropTypes.string,
-      endBlockId: PropTypes.string,
+      source: PropTypes.string,
+      target: PropTypes.string,
       points: PropTypes.arrayOf(
         PropTypes.shape({
           x: PropTypes.number,
           y: PropTypes.number,
         }),
       ),
+      type: PropTypes.string.isRequired,
     }),
   ).isRequired,
   gridSize: PropTypes.number.isRequired,
@@ -48,11 +53,12 @@ class Workspace extends PureComponent {
   constructor(props) {
     super(props);
 
+    const { blocks, paths } = props;
     this.state = {
       width: '1300px',
       height: '900px',
-      blocks: props.blocks,
-      paths: props.paths,
+      blocks,
+      paths,
       tempPath: null,
       selected: '',
       dragging: '',
@@ -69,10 +75,11 @@ class Workspace extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { blocks, paths } = nextProps;
     this.setState({
       ...this.state,
-      blocks: nextProps.blocks,
-      paths: nextProps.paths,
+      blocks,
+      paths,
     });
   }
 
@@ -87,6 +94,7 @@ class Workspace extends PureComponent {
     const target = evt.target.parentElement;
     const targetClass = target.getAttribute('class');
 
+    // TODO: figure out a better way to check if it's a block.
     if (targetClass && targetClass.includes('__block')) {
       // If click is on draggable component, begin dragging, remove selection,
       // and set dragged block to top (bottom of blocks array).
@@ -223,21 +231,21 @@ class Workspace extends PureComponent {
     const { gridSize } = this.props;
 
     // Store a set of original workspace coordinates.
-    const workflow = document.getElementById('_workflow');
-    this.originalWorkspaceCoordinates.x = workflow.scrollLeft;
-    this.originalWorkspaceCoordinates.y = workflow.scrollTop;
+    const offset = elementOffset(this.workspace);
+    this.originalWorkspaceCoordinates.x = offset.x;
+    this.originalWorkspaceCoordinates.y = offset.y;
 
     // Get relative workspace position.
-    const actualX = evt.clientX + this.originalWorkspaceCoordinates.x;
-    const actualY = evt.clientY + this.originalWorkspaceCoordinates.y;
+    const actualX = evt.pageX - this.originalWorkspaceCoordinates.x;
+    const actualY = evt.pageY - this.originalWorkspaceCoordinates.y;
 
     // Set temporary path.
     this.setState({
       ...this.state,
       tempPath: {
         title: '',
-        startBlockId: id,
-        endBlockId: '',
+        source: id,
+        target: '',
         mouse: {
           x: roundToNearest(actualX, gridSize),
           y: roundToNearest(actualY, gridSize),
@@ -256,8 +264,8 @@ class Workspace extends PureComponent {
     const { blocks, tempPath } = this.state;
 
     // Get relative workspace position.
-    const actualX = evt.clientX + this.originalWorkspaceCoordinates.x;
-    const actualY = evt.clientY + this.originalWorkspaceCoordinates.y;
+    const actualX = evt.clientX - this.originalWorkspaceCoordinates.x;
+    const actualY = evt.clientY - this.originalWorkspaceCoordinates.y;
 
     if (tempPath) {
       // Check if dragged block is overlapping.
@@ -269,7 +277,7 @@ class Workspace extends PureComponent {
       };
 
       const endBlock = blocks.find(block => (
-        block.id !== tempPath.startBlockId
+        block.id !== tempPath.source
         && isBlockColliding(
           draggedPath,
           block,
@@ -286,7 +294,7 @@ class Workspace extends PureComponent {
             x: roundToNearest(actualX, gridSize),
             y: roundToNearest(actualY, gridSize),
           },
-          endBlockId: endBlock ? endBlock.id : '',
+          target: endBlock ? endBlock.id : '',
         },
       });
     } else {
@@ -302,11 +310,11 @@ class Workspace extends PureComponent {
     const { tempPath, paths } = this.state;
 
     const canPlacePath = tempPath
-      && tempPath.endBlockId
-      && (tempPath.endBlockId !== tempPath.startBlockId)
+      && tempPath.target
+      && (tempPath.target !== tempPath.source)
       && !(paths.some(path => (
-        path.startBlockId === tempPath.startBlockId
-        && path.endBlockId === tempPath.endBlockId
+        path.source === tempPath.source
+        && path.target === tempPath.target
       )));
     if (!canPlacePath) {
       console.warn('Can\'t place path here!');
@@ -322,14 +330,14 @@ class Workspace extends PureComponent {
             ...tempPath,
             id: String(Math.ceil(Math.random() * 100000)),
             mouse: undefined,
-          }
+          },
         ],
-      })
+      });
     } else {
       this.setState({
         ...this.state,
         tempPath: null,
-      })
+      });
     }
 
     // Remove listeners and reset coordinates.
@@ -360,7 +368,7 @@ class Workspace extends PureComponent {
     let pathIndexesToDelete = [];
     let trimmedPaths = paths.slice();
     trimmedPaths.forEach((path, index) => {
-      if (path.startBlockId === id || path.endBlockId === id) {
+      if (path.source === id || path.target === id) {
         pathIndexesToDelete.push(index);
       }
     });
@@ -376,7 +384,7 @@ class Workspace extends PureComponent {
         ...blocks.slice(index + 1),
       ],
       paths: trimmedPaths,
-    })
+    });
   };
 
   onPathDelete = id => {
@@ -490,8 +498,8 @@ class Workspace extends PureComponent {
               <Path
                 key={path.id}
                 onDelete={this.onPathDelete}
-                startBlock={blocks.find(bl => bl.id === path.startBlockId)}
-                endBlock={blocks.find(bl => bl.id === path.endBlockId)}
+                startBlock={blocks.find(bl => bl.id === path.source)}
+                endBlock={blocks.find(bl => bl.id === path.target)}
                 {...path}
               />
             );
@@ -501,8 +509,8 @@ class Workspace extends PureComponent {
               <Path
                 id="_tempPath"
                 onDelete={this.onPathDelete}
-                startBlock={blocks.find(bl => bl.id === tempPath.startBlockId)}
-                endBlock={blocks.find(bl => bl.id === tempPath.endBlockId)}
+                startBlock={blocks.find(bl => bl.id === tempPath.source)}
+                endBlock={blocks.find(bl => bl.id === tempPath.target)}
                 {...tempPath}
               />
             )
@@ -517,7 +525,10 @@ class Workspace extends PureComponent {
                 {...block}
                 isSelected={isSelected}
                 isDragging={isDragging}
-                isHighlighted={!!(tempPath && tempPath.endBlockId === block.id)}
+                isHighlighted={tempPath
+                  ? tempPath.target === block.id
+                  : false
+                }
                 isInvalid={isInvalid && isDragging}
               />
             );
