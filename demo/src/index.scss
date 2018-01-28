@@ -1,9 +1,14 @@
 html,
-body,
-#root {
+body {
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
+}
+
+
+#root {
+  height: 150%;
+  width: 150%;
 }
 
 body {
@@ -13,8 +18,8 @@ body {
 }
 
 .test-workflow {
-  height: 80%;
-  width: 80%;
+  height: 600px;
+  width: 1000px;
   box-sizing: border-box;
   padding: 8px 16px 6px 8px;
   border: 1px solid #ccc;

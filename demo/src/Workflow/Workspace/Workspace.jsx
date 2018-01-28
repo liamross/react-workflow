@@ -10,6 +10,7 @@ import {
 } from '../Utilities/workflowUtils';
 
 import './Workspace.scss';
+import { elementOffset } from '../Utilities/pageUtils';
 
 // TODO: add some form of submission.
 const propTypes = {
@@ -69,10 +70,11 @@ class Workspace extends PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { blocks, paths } = nextProps;
     this.setState({
       ...this.state,
-      blocks: nextProps.blocks,
-      paths: nextProps.paths,
+      blocks,
+      paths,
     });
   }
 
@@ -223,13 +225,13 @@ class Workspace extends PureComponent {
     const { gridSize } = this.props;
 
     // Store a set of original workspace coordinates.
-    const workflow = document.getElementById('_workflow');
-    this.originalWorkspaceCoordinates.x = workflow.scrollLeft;
-    this.originalWorkspaceCoordinates.y = workflow.scrollTop;
+    const offset = elementOffset(this.workspace);
+    this.originalWorkspaceCoordinates.x = offset.x;
+    this.originalWorkspaceCoordinates.y = offset.y;
 
     // Get relative workspace position.
-    const actualX = evt.clientX + this.originalWorkspaceCoordinates.x;
-    const actualY = evt.clientY + this.originalWorkspaceCoordinates.y;
+    const actualX = evt.pageX - this.originalWorkspaceCoordinates.x;
+    const actualY = evt.pageY - this.originalWorkspaceCoordinates.y;
 
     // Set temporary path.
     this.setState({
@@ -256,8 +258,8 @@ class Workspace extends PureComponent {
     const { blocks, tempPath } = this.state;
 
     // Get relative workspace position.
-    const actualX = evt.clientX + this.originalWorkspaceCoordinates.x;
-    const actualY = evt.clientY + this.originalWorkspaceCoordinates.y;
+    const actualX = evt.clientX - this.originalWorkspaceCoordinates.x;
+    const actualY = evt.clientY - this.originalWorkspaceCoordinates.y;
 
     if (tempPath) {
       // Check if dragged block is overlapping.
@@ -322,14 +324,14 @@ class Workspace extends PureComponent {
             ...tempPath,
             id: String(Math.ceil(Math.random() * 100000)),
             mouse: undefined,
-          }
+          },
         ],
-      })
+      });
     } else {
       this.setState({
         ...this.state,
         tempPath: null,
-      })
+      });
     }
 
     // Remove listeners and reset coordinates.
@@ -376,7 +378,7 @@ class Workspace extends PureComponent {
         ...blocks.slice(index + 1),
       ],
       paths: trimmedPaths,
-    })
+    });
   };
 
   onPathDelete = id => {
@@ -415,6 +417,7 @@ class Workspace extends PureComponent {
     const isInvalid = cursorOutsideWorkspace || isOverlapping;
     return (
       <div
+        id="_workspace"
         className="WorkflowWorkspace"
         style={{
           width: width,
@@ -517,7 +520,10 @@ class Workspace extends PureComponent {
                 {...block}
                 isSelected={isSelected}
                 isDragging={isDragging}
-                isHighlighted={!!(tempPath && tempPath.endBlockId === block.id)}
+                isHighlighted={tempPath
+                  ? tempPath.endBlockId === block.id
+                  : false
+                }
                 isInvalid={isInvalid && isDragging}
               />
             );
