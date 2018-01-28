@@ -3,12 +3,5 @@
   "version": "0.1.0",
   "main": "index.js",
   "author": "Liam Ross",
-  "license": "UNLICENSED",
-  "scripts": {
-    "predeploy": "cd demo && npm run build",
-    "deploy": "cd demo && gh-pages -d build",
-    "start": "cd demo && node scripts/start.js",
-    "build": "cd demo && node scripts/build.js",
-    "test": "cd demo && node scripts/test.js --env=jsdom"
-  }
+  "license": "UNLICENSED"
 }
