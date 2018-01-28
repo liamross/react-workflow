@@ -10,12 +10,8 @@ import { ShapeParameters } from '../Block/Shapes';
  * @returns {boolean} - True if blocks overlap, false if they do not.
  */
 export const isBlockColliding = (block1, block2, gridSize, allowContact) => {
-  const { width: firstW, height: firstH } = block1.hasOwnProperty('shape')
-    ? ShapeParameters[block1.shape]
-    : block1;
-  const { width: secondW, height: secondH } = block2.hasOwnProperty('shape')
-    ? ShapeParameters[block2.shape]
-    : block2;
+  const { width: firstW, height: firstH } = getWidthHeight(block1);
+  const { width: secondW, height: secondH } = getWidthHeight(block2);
   return (
     block1
     && block2
@@ -23,7 +19,7 @@ export const isBlockColliding = (block1, block2, gridSize, allowContact) => {
     && block2.x < block1.x + (allowContact ? 0 : gridSize / 2) + firstW
     && block1.y < block2.y + (allowContact ? 0 : gridSize / 2) + secondH
     && block2.y < block1.y + (allowContact ? 0 : gridSize / 2) + firstH
-  )
+  );
 };
 
 /**
@@ -63,26 +59,22 @@ export const blockToFront = (id, blocks) => {
  * @returns {Object} - Object with keys x, y of block midpoint.
  */
 export const getBlockMidpoint = (block, gridSize = 0) => {
-  const { width, height } = block.hasOwnProperty('shape')
-    ? ShapeParameters[block.shape]
-    : block;
+  const { width, height } = getWidthHeight(block);
   const x = roundToNearest(block.x + width / 2, gridSize);
   const y = roundToNearest(block.y + height / 2, gridSize);
   return { x, y };
 };
 
 /**
- * Finds the point along the side of the block to snap to.
- * @param {Object} intersectPoint - Point suspected of intersecting.
+ * Finds the point along the side of the block to trip path to.
+ * @param {Object} intersectPoint - Point suspected of being within a block.
  * @param {Object} nextPoint - Next-closest path point.
  * @param {Object} block - Object to find side-point of.
  * @returns {Object} - Intersect with block edge, or center if no intersect.
  */
 export const getPathBlockIntersection = (intersectPoint, nextPoint, block) => {
   if (intersectPoint && nextPoint && block) {
-    const { width: bw, height: bh } = block.hasOwnProperty('shape')
-      ? ShapeParameters[block.shape]
-      : block;
+    const { width: bw, height: bh } = getWidthHeight(block);
     // Set path points (same for every function call).
     const p = [intersectPoint.x, intersectPoint.y, nextPoint.x, nextPoint.y];
 
@@ -90,33 +82,21 @@ export const getPathBlockIntersection = (intersectPoint, nextPoint, block) => {
     const bx = block.x;
     const by = block.y;
 
-    // Check left edge.
-    const leftIntersect = lineIntersect(...p, bx, by, bx, by + bh);
-    if (leftIntersect) {
-      return leftIntersect;
-    }
-
-    // Check right edge.
-    const rightIntersect = lineIntersect(...p, bx + bw, by, bx + bw, by + bh);
-    if (rightIntersect) {
-      return rightIntersect;
-    }
-
-    // Check top edge.
-    const topIntersect = lineIntersect(...p, bx, by, bx + bw, by);
-    if (topIntersect) {
-      return topIntersect;
-    }
-
-    // Check bottom edge.
-    const bottomIntersect = lineIntersect(...p, bx, by + bh, bx + bw, by + bh);
-    if (bottomIntersect) {
-      return bottomIntersect;
-    }
+    return (
+      lineIntersect(...p, bx, by, bx, by + bh)              // Left edge.
+      || lineIntersect(...p, bx + bw, by, bx + bw, by + bh) // Right edge.
+      || lineIntersect(...p, bx, by, bx + bw, by)           // Top edge.
+      || lineIntersect(...p, bx, by + bh, bx + bw, by + bh) // Bottom edge.
+      || { x: intersectPoint.x, y: intersectPoint.y }       // Default
+    );
   }
+};
 
-  // No intersection (happens when blocks are overlapping).
-  return { x: intersectPoint.x, y: intersectPoint.y };
+export const getWidthHeight = block => {
+  const { width, height } = block.hasOwnProperty('shape')
+    ? ShapeParameters[block.shape]
+    : block;
+  return { width, height };
 };
 
 /**
@@ -134,18 +114,15 @@ export const getPathBlockIntersection = (intersectPoint, nextPoint, block) => {
  * @returns {Object | null} - If lines intersect, return intersect, else null.
  */
 export const lineIntersect = (x1, y1, x2, y2, x3, y3, x4, y4) => {
-  const denominator = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
-  if (denominator === 0) {
-    return null;
+  const denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
+  if (denom) {
+    const ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denom;
+    const ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denom;
+    return ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1
+      ? { x: x1 + ua * (x2 - x1), y: y1 + ua * (y2 - y1) }
+      : null;
   }
-  const ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denominator;
-  const ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denominator;
-  return ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1
-    ? {
-      x: x1 + ua * (x2 - x1),
-      y: y1 + ua * (y2 - y1),
-    }
-    : null;
+  return null;
 };
 
 /**
@@ -155,7 +132,7 @@ export const lineIntersect = (x1, y1, x2, y2, x3, y3, x4, y4) => {
  */
 const nextIdIterator = prefix => {
   let nextId = 1;
-  return () => `${prefix}-${nextId++}`
+  return () => `${prefix}-${nextId++}`;
 };
 // export const getNextBlockId = nextIdIterator('block');
 export const getNextPathId = nextIdIterator('path');
