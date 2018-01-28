@@ -9,7 +9,6 @@ import './Path.scss';
 const propTypes = {
   // Required.
   title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
   startBlock: PropTypes.shape({
     title: PropTypes.string,
     id: PropTypes.string,
@@ -52,7 +51,6 @@ const defaultProps = {
 
 function Path({
   title,
-  id,
   startBlock,
   onDelete,
   endBlock,
@@ -116,7 +114,6 @@ function Path({
       + (endBlock ? '' : ' WorkflowPath--invalid')
       + (className ? ' ' + className : '')
       }
-      id={id}
     >
       <path
         className="WorkflowPath__line"

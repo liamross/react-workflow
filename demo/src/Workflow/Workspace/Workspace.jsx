@@ -7,6 +7,7 @@ import {
   isBlockColliding,
   roundToNearest,
   blockToFront,
+  getNextId,
 } from '../Utilities/workflowUtils';
 
 import './Workspace.scss';
@@ -17,7 +18,6 @@ const propTypes = {
   blocks: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      id: PropTypes.string,
       x: PropTypes.number,
       y: PropTypes.number,
       width: PropTypes.number,
@@ -27,7 +27,6 @@ const propTypes = {
   paths: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      id: PropTypes.string,
       startBlockId: PropTypes.string,
       endBlockId: PropTypes.string,
       points: PropTypes.arrayOf(
@@ -52,7 +51,7 @@ class Workspace extends PureComponent {
     this.state = {
       width: '1300px',
       height: '900px',
-      blocks: props.blocks,
+      blocks: props.blocks.map(block => ({...block, id: getNextId()})),
       paths: props.paths,
       tempPath: null,
       selected: '',
@@ -73,7 +72,7 @@ class Workspace extends PureComponent {
     const { blocks, paths } = nextProps;
     this.setState({
       ...this.state,
-      blocks,
+      blocks: blocks.map(block => ({...block, id: getNextId()})),
       paths,
     });
   }
@@ -417,7 +416,6 @@ class Workspace extends PureComponent {
     const isInvalid = cursorOutsideWorkspace || isOverlapping;
     return (
       <div
-        id="_workspace"
         className="WorkflowWorkspace"
         style={{
           width: width,
@@ -502,7 +500,6 @@ class Workspace extends PureComponent {
           {tempPath
             ? (
               <Path
-                id="_tempPath"
                 onDelete={this.onPathDelete}
                 startBlock={blocks.find(bl => bl.id === tempPath.startBlockId)}
                 endBlock={blocks.find(bl => bl.id === tempPath.endBlockId)}
