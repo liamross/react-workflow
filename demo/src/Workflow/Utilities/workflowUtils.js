@@ -10,15 +10,15 @@ import { ShapeParameters } from '../Block/Shapes';
  * @returns {boolean} - True if blocks overlap, false if they do not.
  */
 export const isBlockColliding = (block1, block2, gridSize, allowContact) => {
-  const { width: firstW, height: firstH } = getWidthHeight(block1);
-  const { width: secondW, height: secondH } = getWidthHeight(block2);
+  const { width: firstWidth, height: firstHeight } = getWidthHeight(block1);
+  const { width: secondWidth, height: secondHeight } = getWidthHeight(block2);
   return (
     block1
     && block2
-    && block1.x < block2.x + (allowContact ? 0 : gridSize / 2) + secondW
-    && block2.x < block1.x + (allowContact ? 0 : gridSize / 2) + firstW
-    && block1.y < block2.y + (allowContact ? 0 : gridSize / 2) + secondH
-    && block2.y < block1.y + (allowContact ? 0 : gridSize / 2) + firstH
+    && block1.x < block2.x + (allowContact ? 0 : gridSize / 2) + secondWidth
+    && block2.x < block1.x + (allowContact ? 0 : gridSize / 2) + firstWidth
+    && block1.y < block2.y + (allowContact ? 0 : gridSize / 2) + secondHeight
+    && block2.y < block1.y + (allowContact ? 0 : gridSize / 2) + firstHeight
   );
 };
 
@@ -41,22 +41,14 @@ export const roundToNearest = (number, interval) => (
  */
 export const blockToFront = (id, blocks) => {
   const sortBlocks = blocks.slice();
-  return sortBlocks.sort((a, b) => {
-    if (b.id === id) {
-      return -1;
-    }
-    if (a.id === id) {
-      return 1;
-    }
-    return 0;
-  });
+  return sortBlocks.sort((a, b) => a.id === id ? 1 : b.id === id ? -1 : 0);
 };
 
 /**
  * Find the coordinates of a block's midpoint.
  * @param {Object} block - Block to find midpoint of.
  * @param {number} gridSize - Grid size for rounding, no rounding if none given.
- * @returns {Object} - Object with keys x, y of block midpoint.
+ * @returns {{x: number, y: number}} - Coordinates of block's midpoint.
  */
 export const getBlockMidpoint = (block, gridSize = 0) => {
   const { width, height } = getWidthHeight(block);
@@ -69,29 +61,27 @@ export const getBlockMidpoint = (block, gridSize = 0) => {
  * Finds the point along the side of the block to trip path to.
  * @param {Object} intersectPoint - Point suspected of being within a block.
  * @param {Object} nextPoint - Next-closest path point.
- * @param {Object} block - Object to find side-point of.
- * @returns {Object} - Intersect with block edge, or center if no intersect.
+ * @param {Object} block - Block to find side-point of.
+ * @returns {{x: number, y: number}} - Intersect, or center if none found.
  */
 export const getPathBlockIntersection = (intersectPoint, nextPoint, block) => {
-  if (intersectPoint && nextPoint && block) {
-    const { width: bw, height: bh } = getWidthHeight(block);
-    // Set path points (same for every function call).
-    const p = [intersectPoint.x, intersectPoint.y, nextPoint.x, nextPoint.y];
-
-    // Set constants for block parameters.
-    const bx = block.x;
-    const by = block.y;
-
-    return (
-      lineIntersect(...p, bx, by, bx, by + bh)              // Left edge.
-      || lineIntersect(...p, bx + bw, by, bx + bw, by + bh) // Right edge.
-      || lineIntersect(...p, bx, by, bx + bw, by)           // Top edge.
-      || lineIntersect(...p, bx, by + bh, bx + bw, by + bh) // Bottom edge.
-      || { x: intersectPoint.x, y: intersectPoint.y }       // Default
-    );
-  }
+  const p = [intersectPoint.x, intersectPoint.y, nextPoint.x, nextPoint.y];
+  const { x: bx, y: by } = block;
+  const { width: bw, height: bh } = getWidthHeight(block);
+  return (lineIntersect(...p, bx, by, bx, by + bh)        // Left edge.
+    || lineIntersect(...p, bx + bw, by, bx + bw, by + bh) // Right edge.
+    || lineIntersect(...p, bx, by, bx + bw, by)           // Top edge.
+    || lineIntersect(...p, bx, by + bh, bx + bw, by + bh) // Bottom edge.
+    || { x: intersectPoint.x, y: intersectPoint.y }       // Default (midpoint).
+  );
 };
 
+/**
+ * If block has shape property, returns width and height of shape. Else returns
+ * block's width and height.
+ * @param {Object} block
+ * @returns {{width, height}}
+ */
 export const getWidthHeight = block => {
   const { width, height } = block.hasOwnProperty('shape')
     ? ShapeParameters[block.shape]
@@ -111,7 +101,7 @@ export const getWidthHeight = block => {
  * @param {number} y3 - Point A, Y-coordinate.
  * @param {number} x4 - Point B, X-coordinate.
  * @param {number} y4 - Point B, Y-coordinate.
- * @returns {Object | null} - If lines intersect, return intersect, else null.
+ * @returns {{x: number, y: number}|null} - Return intersect or null if none.
  */
 export const lineIntersect = (x1, y1, x2, y2, x3, y3, x4, y4) => {
   const denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
