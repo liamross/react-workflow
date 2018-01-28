@@ -5,7 +5,7 @@
 Required:
 
 - [nodes](#nodes)
-- [paths](#paths)
+- [edges](#edges)
 - [types](#types)
 
 Not Required:
