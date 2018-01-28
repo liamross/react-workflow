@@ -8,9 +8,24 @@ const propTypes = {};
 const defaultProps = {};
 
 const WorkflowShapes = {
-  Circle: 'default-circle',
   Rectangle: 'default-rectangle',
+  Circle: 'default-circle',
   Diamond: 'default-diamond',
+};
+
+const ShapeParameters = {
+  [WorkflowShapes.Rectangle]: {
+    width: 120,
+    height: 80,
+  },
+  [WorkflowShapes.Circle]: {
+    width: 80,
+    height: 80,
+  },
+  [WorkflowShapes.Diamond]: {
+    width: 120,
+    height: 80,
+  },
 };
 
 function Shapes() {
@@ -24,4 +39,4 @@ function Shapes() {
 Shapes.propTypes = propTypes;
 Shapes.defaultProps = defaultProps;
 
-export { WorkflowShapes, Shapes };
+export { WorkflowShapes, ShapeParameters, Shapes };

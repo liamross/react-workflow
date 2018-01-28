@@ -1,3 +1,5 @@
+import { ShapeParameters } from '../Block/Shapes';
+
 /**
  * Returns true if blocks are overlapping in the workspace, false otherwise.
  * Will return false if either block is an invalid value.
@@ -7,14 +9,22 @@
  * @param {boolean} allowContact - If false, blocks have 1-gridSize buffer.
  * @returns {boolean} - True if blocks overlap, false if they do not.
  */
-export const isBlockColliding = (block1, block2, gridSize, allowContact) => (
-  block1
-  && block2
-  && block1.x < block2.x + (allowContact ? 0 : gridSize / 2) + block2.width
-  && block2.x < block1.x + (allowContact ? 0 : gridSize / 2) + block1.width
-  && block1.y < block2.y + (allowContact ? 0 : gridSize / 2) + block2.height
-  && block2.y < block1.y + (allowContact ? 0 : gridSize / 2) + block1.height
-);
+export const isBlockColliding = (block1, block2, gridSize, allowContact) => {
+  const { width: firstW, height: firstH } = block1.hasOwnProperty('shape')
+    ? ShapeParameters[block1.shape]
+    : block1;
+  const { width: secondW, height: secondH } = block2.hasOwnProperty('shape')
+    ? ShapeParameters[block2.shape]
+    : block2;
+  return (
+    block1
+    && block2
+    && block1.x < block2.x + (allowContact ? 0 : gridSize / 2) + secondW
+    && block2.x < block1.x + (allowContact ? 0 : gridSize / 2) + firstW
+    && block1.y < block2.y + (allowContact ? 0 : gridSize / 2) + secondH
+    && block2.y < block1.y + (allowContact ? 0 : gridSize / 2) + firstH
+  )
+};
 
 /**
  * Rounds number to nearest interval. Returns number if interval is 0.
@@ -53,8 +63,11 @@ export const blockToFront = (id, blocks) => {
  * @returns {Object} - Object with keys x, y of block midpoint.
  */
 export const getBlockMidpoint = (block, gridSize = 0) => {
-  const x = roundToNearest(block.x + block.width / 2, gridSize);
-  const y = roundToNearest(block.y + block.height / 2, gridSize);
+  const { width, height } = block.hasOwnProperty('shape')
+    ? ShapeParameters[block.shape]
+    : block;
+  const x = roundToNearest(block.x + width / 2, gridSize);
+  const y = roundToNearest(block.y + height / 2, gridSize);
   return { x, y };
 };
 
@@ -67,14 +80,15 @@ export const getBlockMidpoint = (block, gridSize = 0) => {
  */
 export const getPathBlockIntersection = (intersectPoint, nextPoint, block) => {
   if (intersectPoint && nextPoint && block) {
+    const { width: bw, height: bh } = block.hasOwnProperty('shape')
+      ? ShapeParameters[block.shape]
+      : block;
     // Set path points (same for every function call).
     const p = [intersectPoint.x, intersectPoint.y, nextPoint.x, nextPoint.y];
 
     // Set constants for block parameters.
     const bx = block.x;
     const by = block.y;
-    const bw = block.width;
-    const bh = block.height;
 
     // Check left edge.
     const leftIntersect = lineIntersect(...p, bx, by, bx, by + bh);
@@ -134,9 +148,14 @@ export const lineIntersect = (x1, y1, x2, y2, x3, y3, x4, y4) => {
     : null;
 };
 
-const nextIdIterator = () => {
+/**
+ * Creates sequential IDs with a given prefix.
+ * @param {string} prefix - Prefix for IDs returned from iterator.
+ * @returns {function(): string} - The ID iterator.
+ */
+const nextIdIterator = prefix => {
   let nextId = 1;
-  return () => `block-${nextId++}`
+  return () => `${prefix}-${nextId++}`
 };
-
-export const getNextId = nextIdIterator();
+// export const getNextBlockId = nextIdIterator('block');
+export const getNextPathId = nextIdIterator('path');

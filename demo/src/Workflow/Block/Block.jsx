@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { WorkflowShapes } from './Shapes';
+import { WorkflowShapes, ShapeParameters } from './Shapes';
 
 import './Block.scss';
 
 const propTypes = {
   // Required.
-  title: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
   shape: PropTypes.string.isRequired,
   isSelected: PropTypes.bool.isRequired,
   isDragging: PropTypes.bool.isRequired,
   isHighlighted: PropTypes.bool.isRequired,
   isInvalid: PropTypes.bool.isRequired,
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
   // Not Required.
   className: PropTypes.string,
 };
@@ -36,10 +34,9 @@ function Block({
   className,
   x,
   y,
-  width,
-  height,
 }) {
   // Set text to center of object.
+  const { width, height } = ShapeParameters[shape];
   const FONT_HEIGHT = 14;
   const fontX = x + width / 2;
   const fontY = y + FONT_HEIGHT / 2 + height / 2;
@@ -61,40 +58,25 @@ function Block({
             className="WorkflowBlock__background"
             x={x}
             y={y}
-            width={width}
-            height={height}
+            width={120}
+            height={80}
           />
         )
         : shape === WorkflowShapes.Circle
           ? (
             <circle
               className="WorkflowBlock__background"
-              cx={x + width / 2}
-              cy={y + width / 2}
-              r={width / 2}
+              cx={x + 40}
+              cy={y + 40}
+              r={40}
             />
           )
           : shape === WorkflowShapes.Diamond
             ? (
               <polygon
                 className="WorkflowBlock__background"
-                points={`${
-                  x + width / 2
-                  },${
-                  y
-                  } ${
-                  x
-                  },${
-                  y + height / 2
-                  } ${
-                  x + width / 2
-                  },${
-                  y + height
-                  } ${
-                  x + width
-                  },${
-                  y + height / 2
-                  }`
+                points={
+                  `${x+60},${y} ${x},${y+40} ${x+60},${y+80} ${x+120},${y+40}`
                 }
               />
             )

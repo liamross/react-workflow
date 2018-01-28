@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { OverlayButton } from './OverlayButton';
+import { ShapeParameters } from '../Block/Shapes';
 
 import './BlockOverlay.scss';
 
@@ -10,8 +11,6 @@ const propTypes = {
     id: PropTypes.string,
     x: PropTypes.number,
     y: PropTypes.number,
-    width: PropTypes.number,
-    height: PropTypes.number,
   }),
   onDelete: PropTypes.func.isRequired,
   onNewPath: PropTypes.func.isRequired,
@@ -38,13 +37,16 @@ class BlockOverlay extends PureComponent {
 
   render() {
     const { selectedBlock } = this.props;
+    const { width, height } = selectedBlock
+      ? ShapeParameters[selectedBlock.shape]
+      : { width: null, height: null, };
     const SPACE_AROUND_BLOCK = 3;
     const style = selectedBlock
       ? {
         left: selectedBlock.x - SPACE_AROUND_BLOCK,
         top: selectedBlock.y - SPACE_AROUND_BLOCK,
-        width: selectedBlock.width + SPACE_AROUND_BLOCK * 2,
-        height: selectedBlock.height + SPACE_AROUND_BLOCK * 2,
+        width: width + SPACE_AROUND_BLOCK * 2,
+        height: height + SPACE_AROUND_BLOCK * 2,
       }
       : {};
 

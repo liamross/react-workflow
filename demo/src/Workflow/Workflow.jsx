@@ -7,45 +7,41 @@ import './Workflow.scss';
 
 const testingBlocks = [
   {
+    id: 'block-1',
     title: 'Block 1',
     shape: WorkflowShapes.Rectangle,
     x: 160,
     y: 160,
-    width: 120,
-    height: 80,
   },
   {
+    id: 'block-2',
     title: 'Block 2',
     shape: WorkflowShapes.Circle,
     x: 300,
     y: 300,
-    width: 80,
-    height: 80,
   },
   {
+    id: 'block-3',
     title: 'Block 3',
     shape: WorkflowShapes.Rectangle,
     x: 460,
     y: 160,
-    width: 120,
-    height: 80,
   },
   {
+    id: 'block-4',
     title: 'Block 4',
     shape: WorkflowShapes.Diamond,
     x: 600,
     y: 300,
-    width: 120,
-    height: 80,
   },
 ];
 
 const testingPaths = [
   {
+    id: 'given-path-1',
     title: 'Path 1',
-    id: 'path-1',
-    startBlockId: 'block-1',
-    endBlockId: 'block-2',
+    source: 'block-1',
+    target: 'block-2',
     points: [
       // {
       //   x: 20,
@@ -68,6 +64,9 @@ const propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
+      shape: PropTypes.oneOf(
+        Object.values(WorkflowShapes),
+      ).isRequired,
       x: PropTypes.number.isRequired,
       y: PropTypes.number.isRequired,
       type: PropTypes.string.isRequired,
