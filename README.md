@@ -27,12 +27,6 @@ node = {
   x:      number, // X-coordinate of the block in the workspace.
   y:      number, // Y-coordinate of the block in the workspace.
   type:   string, // The block style type to represent this node.
-  groups: array,  // Array of groups that this node is in.
-};
-
-group = {
-  id: string,        // Unique ID to differentiate groups.
-  title: string,     // Title of the group for the blocks library.
 };
 ```
 
@@ -73,8 +67,8 @@ types = {
         fill: '#eaeaea',
         stroke: '#333',
         strokeWidth: '1px',
-      }
-    }
+      },
+    },
   },
   paths: {
     // The name here should match the name given in your edge object.
@@ -82,9 +76,9 @@ types = {
       style: {
         stroke: '#333',
         strokeWidth: '1px',
-      }
-    }
-  }
+      },
+    },
+  },
 };
 ```
 
@@ -99,16 +93,29 @@ Props to define parts of the workflow.
 
 ```javascript
 parameters = {
+  
   /* Grid Parameters */
   gridSize: number,             // Size of grid. Default: 0 (no grid)
   showGrid: boolean,            // Show the visual grid. Default: false
   gridColor: string,            // Color of grid. Default: '#eee'
+  
   /* Workspace Parameters */
   initialWidth: number,         // Initial width of workspace. Default: TBD
   initialHeight: number,        // Initial height of workspace. Default: TBD
+  
   /* Block Parameters */
   allowAdjacentBlocks: boolean, // Blocks can be placed touching. Default: false
+  
   /* Path Parameters */
   manhattanRouting: boolean,    // Paths route at 90° angles. Default: false
-}
+  
+  /* Library Parameters */
+  groups: array,                // Array of groups to organize blocks in library
+                                // Default: no grouping in 
+};
+
+group = {
+  title: string,  // Title of the group for the blocks library.
+  types: array,   // Array of block types to include in group.
+};
 ```
