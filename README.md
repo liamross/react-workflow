@@ -86,7 +86,6 @@ blockTypes = {
 
 ```javascript
 blockTypes = {
-  // The name here should match the name given in your node object.
   startCircle: {
     shape: WorkflowShapes.Circle,
     style: {
@@ -119,7 +118,6 @@ pathTypes = {
 
 ```javascript
 pathTypes = {
-  // The name here should match the name given in your edge object.
   defaultPath: {
     style: {
       stroke: '#333',
