@@ -66,7 +66,7 @@ point = {x: number, y: number}; // Represents the coordinates of a point.
 
 ### blockTypes
 
-An object representing various styles for blocks and paths.
+An object representing various styles for blocks.
 
 ```javascript
 blockTypes = {
@@ -82,9 +82,11 @@ blockTypes = {
 };
 ```
 
+---
+
 ### pathTypes
 
-An object representing various styles for blocks and paths.
+An object representing various styles for paths.
 
 ```javascript
 pathTypes = {
