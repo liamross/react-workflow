@@ -1,12 +1,23 @@
 # React Workflow
 
+```javascript
+<Workflow
+  blocks={blocks}
+  paths={paths}
+  blockTypes={blockTypes}
+  pathTypes={pathTypes}
+  parameters={parameters}
+/>
+```
+
 ## Props
 
 Required:
 
 - [nodes](#nodes)
 - [edges](#edges)
-- [types](#types)
+- [blockTypes](#blocktypes)
+- [pathTypes](#pathtypes)
 
 Not Required:
 
@@ -53,30 +64,35 @@ point = {x: number, y: number}; // Represents the coordinates of a point.
 
 ---
 
-### types
+### blockTypes
 
 An object representing various styles for blocks and paths.
 
 ```javascript
-types = {
-  blocks: {
-    // The name here should match the name given in your node object.
-    startCircle: {
-      shape: WorkflowShapes.Circle,
-      style: {
-        fill: '#eaeaea',
-        stroke: '#333',
-        strokeWidth: '1px',
-      },
+blockTypes = {
+  // The name here should match the name given in your node object.
+  startCircle: {
+    shape: WorkflowShapes.Circle,
+    style: {
+      fill: '#eaeaea',
+      stroke: '#333',
+      strokeWidth: '1px',
     },
   },
-  paths: {
-    // The name here should match the name given in your edge object.
-    defaultPath: {
-      style: {
-        stroke: '#333',
-        strokeWidth: '1px',
-      },
+};
+```
+
+### pathTypes
+
+An object representing various styles for blocks and paths.
+
+```javascript
+pathTypes = {
+  // The name here should match the name given in your edge object.
+  defaultPath: {
+    style: {
+      stroke: '#333',
+      strokeWidth: '1px',
     },
   },
 };
