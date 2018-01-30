@@ -129,7 +129,7 @@ parameters = {
   
   /* Library Parameters */
   groups: array,                // Array of groups to organize blocks in library
-                                // Default: no grouping in 
+                                // Default: no groups in library component
 };
 
 group = {
