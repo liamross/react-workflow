@@ -71,6 +71,20 @@ An object representing various styles for blocks.
 ```javascript
 blockTypes = {
   // The name here should match the name given in your node object.
+  [name: string]: {
+    shape: WorkflowShape | CustomShape (TBD),
+    style: {
+      // Object of valid style properties.
+    },
+  },
+};
+```
+
+<a name="block-type-example" href="#block-type-example">#</a> example
+
+```javascript
+blockTypes = {
+  // The name here should match the name given in your node object.
   startCircle: {
     shape: WorkflowShapes.Circle,
     style: {
@@ -87,6 +101,19 @@ blockTypes = {
 ### pathTypes
 
 An object representing various styles for paths.
+
+```javascript
+pathTypes = {
+  // The name here should match the name given in your edge object.
+  [name: string]: {
+    style: {
+      // Object of valid style properties.
+    },
+  },
+};
+```
+
+<a name="path-type-example" href="#path-type-example">#</a> example
 
 ```javascript
 pathTypes = {
