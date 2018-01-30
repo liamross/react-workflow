@@ -1,5 +1,7 @@
 # React Workflow
 
+> Plan of action is [here](PLAN.md).
+
 ```javascript
 <Workflow
   blocks={blocks}
