@@ -52,4 +52,4 @@
 
 ### Other
 
-- [ ] **pdate relative location algorithm to update with scroll (3 hours)**
+- [ ] **Update relative location algorithm to update with scroll (3 hours)**
