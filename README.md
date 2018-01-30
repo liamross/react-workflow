@@ -72,7 +72,7 @@ An object representing various styles for blocks.
 blockTypes = {
   // The name here should match the name given in your node object.
   [name: string]: {
-    shape: WorkflowShape | CustomShape (TBD),
+    shape: WorkflowShape | CustomShape,
     style: {
       // Object of valid style properties.
     },
