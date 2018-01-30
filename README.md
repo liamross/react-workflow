@@ -6,7 +6,7 @@
   paths={paths}
   blockTypes={blockTypes}
   pathTypes={pathTypes}
-  parameters={parameters}
+  parameters={parameters} // Optional
 />
 ```
 
