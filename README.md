@@ -75,6 +75,8 @@ blockTypes = {
   // The name here should match the name given in your node object.
   [name: string]: {
     shape: WorkflowShape | CustomShape,
+    width: number,
+    height: number,
     style: {
       // Object of valid style properties.
     },
@@ -88,6 +90,8 @@ blockTypes = {
 blockTypes = {
   startCircle: {
     shape: WorkflowShapes.Circle,
+    width: 80,
+    height: 80,
     style: {
       fill: '#eaeaea',
       stroke: '#333',
@@ -160,7 +164,13 @@ parameters = {
 };
 
 group = {
-  title: string,  // Title of the group for the blocks library.
-  types: array,   // Array of block types to include in group.
+  title: string,      // Title of the group for the blocks library.
+  blockTypes: array,  // Array of block types to include in group.
 };
 ```
+
+## Todo:
+
+- [ ] Implement Halo Menu as plugin?
+- [ ] Parameters for read only
+- [ ] Split up parameters
