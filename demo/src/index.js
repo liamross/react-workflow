@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import Workflow from './Workflow';
+import Workflow from './Old_Workflow';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
