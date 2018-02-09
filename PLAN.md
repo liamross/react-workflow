@@ -1,19 +1,5 @@
 # Plan to complete
 
-## Timeframe
-
-- 60 hours 
-
-- 5 days a week @ 3 hours
-
-- 1 month to complete
-
-## Cost
-
-- @ time and a half: $40/hour
-
-- Total cost: $2400.00
-
 ## To Do
 
 ### Workspace
