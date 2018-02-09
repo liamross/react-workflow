@@ -1,12 +1,25 @@
 # React Workflow
 
+> Plan of action is [here](PLAN.md).
+
+```javascript
+<Workflow
+  blocks={blocks}
+  paths={paths}
+  blockTypes={blockTypes}
+  pathTypes={pathTypes}
+  parameters={parameters} // Optional
+/>
+```
+
 ## Props
 
 Required:
 
 - [nodes](#nodes)
 - [edges](#edges)
-- [types](#types)
+- [blockTypes](#blocktypes)
+- [pathTypes](#pathtypes)
 
 Not Required:
 
@@ -53,30 +66,66 @@ point = {x: number, y: number}; // Represents the coordinates of a point.
 
 ---
 
-### types
+### blockTypes
 
-An object representing various styles for blocks and paths.
+An object representing various styles for blocks.
 
 ```javascript
-types = {
-  blocks: {
-    // The name here should match the name given in your node object.
-    startCircle: {
-      shape: WorkflowShapes.Circle,
-      style: {
-        fill: '#eaeaea',
-        stroke: '#333',
-        strokeWidth: '1px',
-      },
+blockTypes = {
+  // The name here should match the name given in your node object.
+  [name: string]: {
+    shape: WorkflowShape | CustomShape,
+    width: number,
+    height: number,
+    style: {
+      // Object of valid style properties.
     },
   },
-  paths: {
-    // The name here should match the name given in your edge object.
-    defaultPath: {
-      style: {
-        stroke: '#333',
-        strokeWidth: '1px',
-      },
+};
+```
+
+<a name="block-type-example" href="#block-type-example">#</a> example
+
+```javascript
+blockTypes = {
+  startCircle: {
+    shape: WorkflowShapes.Circle,
+    width: 80,
+    height: 80,
+    style: {
+      fill: '#eaeaea',
+      stroke: '#333',
+      strokeWidth: '1px',
+    },
+  },
+};
+```
+
+---
+
+### pathTypes
+
+An object representing various styles for paths.
+
+```javascript
+pathTypes = {
+  // The name here should match the name given in your edge object.
+  [name: string]: {
+    style: {
+      // Object of valid style properties.
+    },
+  },
+};
+```
+
+<a name="path-type-example" href="#path-type-example">#</a> example
+
+```javascript
+pathTypes = {
+  defaultPath: {
+    style: {
+      stroke: '#333',
+      strokeWidth: '1px',
     },
   },
 };
@@ -111,11 +160,17 @@ parameters = {
   
   /* Library Parameters */
   groups: array,                // Array of groups to organize blocks in library
-                                // Default: no grouping in 
+                                // Default: no groups in library component
 };
 
 group = {
-  title: string,  // Title of the group for the blocks library.
-  types: array,   // Array of block types to include in group.
+  title: string,      // Title of the group for the blocks library.
+  blockTypes: array,  // Array of block types to include in group.
 };
 ```
+
+## Todo:
+
+- [ ] Implement Halo Menu as plugin?
+- [ ] Parameters for read only
+- [ ] Split up parameters
