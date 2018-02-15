@@ -1,7 +1,19 @@
 {
-  "name": "react-workflow",
+  "name": "workflow",
   "version": "0.1.0",
-  "main": "index.js",
-  "author": "Liam Ross",
-  "license": "UNLICENSED"
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run webpack\"",
+    "server": "http-server ./demo -c 0",
+    "webpack": "webpack --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "concurrently": "^3.5.1",
+    "http-server": "^0.11.1",
+    "webpack": "^3.10.0"
+  }
 }

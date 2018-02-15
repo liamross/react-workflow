@@ -2,10 +2,10 @@ import {
     createElementWithAttributes,
     createSVGWithAttributes,
 } from '../utilities/domUtils';
-import {setPaperDefs} from './PaperFunctions/paperDefs';
+import { setPaperDefs } from './PaperDefs';
 
 export class Paper {
-    constructor ({width, height, plugins, ...params}) {
+    constructor({ width, height, plugins, attributes, initialConditions }) {
         // Workspace parameters.
         this.width = width;
         this.height = height;
@@ -17,19 +17,18 @@ export class Paper {
         this.paperId = `paper_${randomId}`;
 
         // Additional parameters or defaults.
-        this.gridSize = params.gridSize || 0;
-        this.gridColor = params.gridColor || '#EEE';
-        this.allowBlockOverlap = params.allowBlockOverlap || false;
-        const paperWrapperClass = params.paperWrapperClass || '';
-        const paperClass = params.paperClass || '';
+        this.gridSize = attributes.gridSize || 0;
+        this.gridColor = attributes.gridColor || '#EEE';
+        this.allowBlockOverlap = attributes.allowBlockOverlap || false;
+        this.nodes = initialConditions.nodes || [];
+        this.edges = initialConditions.edges || [];
+        const paperWrapperClass = attributes.paperWrapperClass || '';
+        const paperClass = attributes.paperClass || '';
 
         // Paper Wrapper set up.
         const PWAttributes = {};
         PWAttributes.id = this.paperWrapperId;
-        // TODO: set mousedown function.
-        PWAttributes.onmousedown = (evt) => {
-            console.warn('IMPLEMENT onmousedown:\n', evt);
-        };
+        // TODO: onmousedown listener.
         PWAttributes.style = `width:${this.width}; height:${this.height}`;
         if (paperWrapperClass) { PWAttributes.class = paperWrapperClass; }
         this.paperWrapper = createElementWithAttributes('div', PWAttributes);
@@ -37,16 +36,20 @@ export class Paper {
         // Paper set up.
         const PAttributes = {};
         PAttributes.id = this.paperId;
+        PAttributes.width = '100%';
+        PAttributes.height = '100%';
         if (paperClass) { PAttributes.class = paperClass; }
         this.paper = createSVGWithAttributes('svg', PAttributes);
 
         // Add defs to paper.
-        this.paper.appendChild(setPaperDefs(this.gridSize, this.gridColor));
+        setPaperDefs(this.paper, this.gridSize, this.gridColor);
 
         // Append paper into wrapper.
         this.paperWrapper.appendChild(this.paper);
 
-        // TODO: if provided initial nodes + edges, call add for each.
+        // Add initial nodes and edges to paper.
+        this.nodes.forEach(node => this.renderNode(node));
+        this.edges.forEach(edge => this.renderNode(edge));
     }
 
     /**
@@ -57,23 +60,31 @@ export class Paper {
         return this.paperWrapper;
     }
 
-    addNode (node) {
+    renderNode(node) {
         // TODO: implement.
     }
 
-    updateNode () {
+    addNode(node) {
         // TODO: implement.
     }
 
-    removeNode (id) {
+    updateNode() {
         // TODO: implement.
     }
 
-    addEdge (edge) {
+    removeNode(id) {
         // TODO: implement.
     }
 
-    updateEdge () {
+    renderEdge(edge) {
+        // TODO: implement.
+    }
+
+    addEdge(edge) {
+        // TODO: implement.
+    }
+
+    updateEdge() {
         // TODO: implement.
     }
 

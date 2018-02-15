@@ -1,13 +1,15 @@
-import {createSVGWithAttributes} from '../../utilities/domUtils';
+import {createSVGWithAttributes} from '../utilities/domUtils';
 
 /**
  * Builds out the complete defs element for paper component.
+ * @param {Element} paperElement - Paper element to append defs to.
  * @param {number} gridSize - Size of grid pattern.
  * @param {string} gridColor - Color of grid.
  * @returns {Element} - Returns def SVG element for paper.
  */
-export function setPaperDefs(gridSize, gridColor) {
+export function setPaperDefs(paperElement, gridSize, gridColor) {
     const defs = createSVGWithAttributes('defs');
+    paperElement.appendChild(defs);
 
     // Add grid if valid grid size is provided.
     if (gridSize > 0) {
@@ -22,7 +24,7 @@ export function setPaperDefs(gridSize, gridColor) {
             d: `M ${gridSize / 2} 0 L 0 0 0 ${gridSize / 2}`,
             fill: 'none',
             stroke: gridColor,
-            strokeWidth: '0.5',
+            'stroke-width': '0.5',
         });
         subgrid.appendChild(subgridPath);
         defs.appendChild(subgrid);
@@ -43,11 +45,21 @@ export function setPaperDefs(gridSize, gridColor) {
             d: `M ${gridSize} 0 L 0 0 0 ${gridSize}`,
             fill: 'none',
             stroke: gridColor,
-            strokeWidth: '1',
+            'stroke-width': '1',
         });
         grid.appendChild(gridRect);
         grid.appendChild(gridPath);
         defs.appendChild(grid);
+
+        // Create grid container.
+        const gridContainer = createSVGWithAttributes('rect', {
+            width: '100%',
+            height: '100%',
+            fill: 'url(#_grid)',
+        });
+
+        // Add grid to paper.
+        paperElement.appendChild(gridContainer);
     }
 
     // Arrowhead
@@ -64,10 +76,7 @@ export function setPaperDefs(gridSize, gridColor) {
     const arrowheadPath = createSVGWithAttributes('path', {
         d: 'M 0 0 L 0 10 L 10 5 Z',
         fill: '#333',
-        className: 'WorkflowPath__arrowhead',
     });
     arrowhead.appendChild(arrowheadPath);
     defs.appendChild(arrowhead);
-
-    return defs;
 }

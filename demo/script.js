@@ -1,4 +1,4 @@
-import {Paper} from './Workflow/Paper/Paper';
+import {Paper} from '../src';
 
 function loadPaper() {
     console.log('load paper');
@@ -8,7 +8,10 @@ function loadPaper() {
         attributes: {
             gridSize: 20,
         },
+        initialConditions: {},
     });
     const target = document.getElementById('_target');
     target.appendChild(myPaper.getPaperElement());
 }
+
+document.addEventListener('DOMContentLoaded', () => loadPaper());
