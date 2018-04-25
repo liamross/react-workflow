@@ -87,7 +87,7 @@ function Block({
         x={fontX}
         y={fontY}
         textAnchor="middle"
-        fontSize="14"
+        fontSize={FONT_HEIGHT}
       >
         {title}
       </text>
