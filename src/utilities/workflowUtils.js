@@ -8,15 +8,16 @@
  * @returns {boolean} - True if nodes overlap, false if they do not.
  */
 export const isNodeColliding = (node1, node2, gridSize, allowContact) => {
-    const {width: firstWidth, height: firstHeight} = getWidthHeight(node1);
-    const {width: secondWidth, height: secondHeight} = getWidthHeight(node2);
-    return (
-        node1 && node2
-        && node1.x < node2.x + (allowContact ? 0 : gridSize / 2) + secondWidth
-        && node2.x < node1.x + (allowContact ? 0 : gridSize / 2) + firstWidth
-        && node1.y < node2.y + (allowContact ? 0 : gridSize / 2) + secondHeight
-        && node2.y < node1.y + (allowContact ? 0 : gridSize / 2) + firstHeight
-    );
+  const { width: firstWidth, height: firstHeight } = getWidthHeight(node1);
+  const { width: secondWidth, height: secondHeight } = getWidthHeight(node2);
+  return (
+    node1 &&
+    node2 &&
+    node1.x < node2.x + (allowContact ? 0 : gridSize / 2) + secondWidth &&
+    node2.x < node1.x + (allowContact ? 0 : gridSize / 2) + firstWidth &&
+    node1.y < node2.y + (allowContact ? 0 : gridSize / 2) + secondHeight &&
+    node2.y < node1.y + (allowContact ? 0 : gridSize / 2) + firstHeight
+  );
 };
 
 /**
@@ -25,9 +26,8 @@ export const isNodeColliding = (node1, node2, gridSize, allowContact) => {
  * @param {number} interval - The interval to round the number to.
  * @returns {number} - The rounded number, or the number if interval is 0.
  */
-export const roundToNearest = (number, interval) => (
-    interval ? Math.round(number / interval) * interval : number
-);
+export const roundToNearest = (number, interval) =>
+  interval ? Math.round(number / interval) * interval : number;
 
 /**
  * Sets the node that has matching id to end of array, making it the top
@@ -37,8 +37,8 @@ export const roundToNearest = (number, interval) => (
  * @returns {Array.<Object>} - Sorted array of nodes.
  */
 export const nodeToFront = (id, nodes) => {
-    const sortNodes = nodes.slice();
-    return sortNodes.sort((a, b) => a.id === id ? 1 : b.id === id ? -1 : 0);
+  const sortNodes = nodes.slice();
+  return sortNodes.sort((a, b) => (a.id === id ? 1 : b.id === id ? -1 : 0));
 };
 
 /**
@@ -48,11 +48,11 @@ export const nodeToFront = (id, nodes) => {
  * @returns {{x: number, y: number}} - Coordinates of node's midpoint.
  */
 export const getNodeMidpoint = (node, gridSize = 0) => {
-    const {width, height} = getWidthHeight(node);
-    return {
-        x: roundToNearest(node.x + width / 2, gridSize),
-        y: roundToNearest(node.y + height / 2, gridSize),
-    };
+  const { width, height } = getWidthHeight(node);
+  return {
+    x: roundToNearest(node.x + width / 2, gridSize),
+    y: roundToNearest(node.y + height / 2, gridSize),
+  };
 };
 
 /**
@@ -63,15 +63,20 @@ export const getNodeMidpoint = (node, gridSize = 0) => {
  * @returns {{x: number, y: number}} - Intersect, or center if none found.
  */
 export const getEdgeNodeIntersection = (intersectPoint, nextPoint, node) => {
-    const e = [intersectPoint.x, intersectPoint.y, nextPoint.x, nextPoint.y];
-    const {x: nx, y: ny} = node;
-    const {width: nw, height: nh} = getWidthHeight(node);
-    return (lineIntersect(...e, nx, ny, nx, ny + nh)            // Left edge.
-        || lineIntersect(...e, nx + nw, ny, nx + nw, ny + nh)   // Right edge.
-        || lineIntersect(...e, nx, ny, nx + nw, ny)             // Top edge.
-        || lineIntersect(...e, nx, ny + nh, nx + nw, ny + nh)   // Bottom edge.
-        || {x: intersectPoint.x, y: intersectPoint.y}           // Default (midpoint).
-    );
+  const e = [intersectPoint.x, intersectPoint.y, nextPoint.x, nextPoint.y];
+  const { x: nx, y: ny } = node;
+  const { width: nw, height: nh } = getWidthHeight(node);
+  // prettier-ignore
+  return (
+    lineIntersect(...e,      nx,      ny,      nx, ny + nh) || // Left edge.
+    lineIntersect(...e, nx + nw,      ny, nx + nw, ny + nh) || // Right edge.
+    lineIntersect(...e,      nx,      ny, nx + nw,      ny) || // Top edge.
+    lineIntersect(...e,      nx, ny + nh, nx + nw, ny + nh) || // Bottom edge.
+    {                                                          // Default.
+      x: intersectPoint.x,
+      y: intersectPoint.y,
+    }
+  );
 };
 
 /**
@@ -82,10 +87,10 @@ export const getEdgeNodeIntersection = (intersectPoint, nextPoint, node) => {
  * @returns {{width, height}}
  */
 export const getWidthHeight = node => {
-    // const {width, height} = node.hasOwnProperty('shape')
-    //     ? ShapeParameters[node.shape]
-    //     : node;
-    // return {width, height};
+  // const {width, height} = node.hasOwnProperty('shape')
+  //     ? ShapeParameters[node.shape]
+  //     : node;
+  // return {width, height};
 };
 
 /**
@@ -103,15 +108,15 @@ export const getWidthHeight = node => {
  * @returns {{x: number, y: number}|null} - Return intersect or null if none.
  */
 export const lineIntersect = (x1, y1, x2, y2, x3, y3, x4, y4) => {
-    const denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
-    if (denom) {
-        const ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denom;
-        const ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denom;
-        return ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1
-            ? {x: x1 + ua * (x2 - x1), y: y1 + ua * (y2 - y1)}
-            : null;
-    }
-    return null;
+  const denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
+  if (denom) {
+    const ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denom;
+    const ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denom;
+    return ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1
+      ? { x: x1 + ua * (x2 - x1), y: y1 + ua * (y2 - y1) }
+      : null;
+  }
+  return null;
 };
 
 /**
@@ -120,8 +125,8 @@ export const lineIntersect = (x1, y1, x2, y2, x3, y3, x4, y4) => {
  * @returns {function(): string} - The ID iterator.
  */
 const nextIdIterator = prefix => {
-    let nextId = 1;
-    return () => `${prefix}-${nextId++}`;
+  let nextId = 1;
+  return () => `${prefix}-${nextId++}`;
 };
 // export const getNextNodeId = nextIdIterator('node');
 export const getNextEdgeId = nextIdIterator('edge');
